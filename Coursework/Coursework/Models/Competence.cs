@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Coursework.Models
 {
-    public class Post : IEntity<int>
+    public class Competence : IEntity<int>
     {
         public int Id { get; set; }
-        public string PostName { get; set; }
+        public string CompetenceName { get; set; }
     }
 }

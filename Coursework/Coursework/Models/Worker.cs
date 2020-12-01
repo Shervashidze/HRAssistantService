@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace Coursework.Models
@@ -9,8 +7,8 @@ namespace Coursework.Models
     public class Worker : IEntity<int>
     {
         public int Id { get; set; }
-        public int PersonnelNumber { get; set; } // Табельный номер
-        public int PhoneNumber { get; set; }
+        public string PersonnelNumber { get; set; } // Табельный номер
+        public string PhoneNumber { get; set; }
 
         public int DepartmentId { get; set; } // id Подразделения
         public int PostId { get; set; } // id Должности
@@ -25,7 +23,12 @@ namespace Coursework.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
-        public List<string> CompetenceList;
+        public List<int> CompetenceIdsList { get; set; }
+
+        public Worker()
+        {
+            CompetenceIdsList = new List<int>();
+        }
 
     }
 }
