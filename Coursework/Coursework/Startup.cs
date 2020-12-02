@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Coursework.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coursework
 {
@@ -23,6 +25,8 @@ namespace Coursework
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("ConnectionString");
+            services.AddDbContext<WorkersDbContext>(options => options.UseNpgsql(connectionString));
             services.AddControllersWithViews();
         }
 
@@ -52,6 +56,8 @@ namespace Coursework
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
+        
     }
 }
