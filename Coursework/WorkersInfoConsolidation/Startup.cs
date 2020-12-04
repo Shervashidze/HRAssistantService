@@ -8,10 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Coursework.Models;
+using WorkersInfoConsolidation.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Coursework
+namespace WorkersInfoConsolidation
 {
     public class Startup
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Coursework.Models
+namespace WorkersInfoConsolidation.Models
 {
     public class Worker : IEntity<int>
     {

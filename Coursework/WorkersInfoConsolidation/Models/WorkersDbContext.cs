@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
-namespace Coursework.Models
+namespace WorkersInfoConsolidation.Models
 {
     public class WorkersDbContext : DbContext
     {

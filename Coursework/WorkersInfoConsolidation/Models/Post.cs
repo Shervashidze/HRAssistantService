@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Coursework.Models
+namespace WorkersInfoConsolidation.Models
 {
     public class Post : IEntity<int>
     {
