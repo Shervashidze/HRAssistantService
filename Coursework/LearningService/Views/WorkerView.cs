@@ -5,7 +5,16 @@ using System.Threading.Tasks;
 
 namespace LearningService.Views
 {
-    public class Class
+    public class WorkerView
     {
+        public long Id { get; set; }
+
+        public long LearningEventId { get; set; }
+
+        public string Feedback { get; set; }
+
+        public int? InitialScore { get; set; }
+
+        public int? AfterwardsScore { get; set; }
     }
 }

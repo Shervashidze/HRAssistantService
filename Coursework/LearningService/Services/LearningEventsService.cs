@@ -19,5 +19,12 @@ namespace LearningService.Services
         {
             return await dbContext.Set<LearningEvent>().Include(c => c.Workers).AsNoTracking().FirstOrDefaultAsync(c => c.Id == learningEventId).ConfigureAwait(false);
         }
+
+        public async Task<long> AddLearningEventAsync(LearningEvent learningEvent)
+        {
+            await dbContext.AddAsync(learningEvent);
+            await dbContext.SaveChangesAsync();
+            return learningEvent.Id;
+        }
     }
 }
