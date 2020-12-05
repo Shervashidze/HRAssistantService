@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LearningService.Models
+namespace LearningService
 {
-    public interface IEntity
+    public class Class
     {
-        long Id { get; set; }
     }
 }

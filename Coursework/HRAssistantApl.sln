@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkersInfoConsolidation", "WorkersInfoConsolidation\WorkersInfoConsolidation.csproj", "{AF95B021-03E5-4D5D-9FD5-3B25CA781CC5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningService", "LearningService\LearningService.csproj", "{525BB060-6C28-486C-8691-FC85207A1D52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AF95B021-03E5-4D5D-9FD5-3B25CA781CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF95B021-03E5-4D5D-9FD5-3B25CA781CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF95B021-03E5-4D5D-9FD5-3B25CA781CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{525BB060-6C28-486C-8691-FC85207A1D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{525BB060-6C28-486C-8691-FC85207A1D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{525BB060-6C28-486C-8691-FC85207A1D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{525BB060-6C28-486C-8691-FC85207A1D52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

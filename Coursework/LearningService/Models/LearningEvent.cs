@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LearningService.Models
@@ -7,5 +8,19 @@ namespace LearningService.Models
     {
         [Key]
         public long Id { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime PlannedDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? ActualDate { get; set; }
+
+        public List<int> CompetencesId { get; set; }
+
+        public List<Worker> Workers { get; set; } = new List<Worker>();
+
+        public int MaxScore { get; set; }
     }
 }

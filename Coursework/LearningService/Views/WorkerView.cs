@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LearningService.Services
+namespace LearningService.Views
 {
     public class Class
     {

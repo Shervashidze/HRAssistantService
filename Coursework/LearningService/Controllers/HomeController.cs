@@ -6,16 +6,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using LearningService.Services;
 
 namespace LearningService.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ILearningEventsService _learningService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ILearningEventsService learningService)
         {
             _logger = logger;
+            _learningService = learningService;
         }
 
         public IActionResult Index()
@@ -23,15 +28,16 @@ namespace LearningService.Controllers
             return View();
         }
 
+        [HttpGet("{eventId}")]
+        public async Task<IActionResult> GetCoursesGroups(long eventId)
+        {
+            var groups = await _learningService.GetEvent(eventId);
+            return Ok(groups);
+        }
+
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
