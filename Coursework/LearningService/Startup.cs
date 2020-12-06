@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using LearningService.Models;
 using LearningService.Services;
+using Npgsql;
+using AutoMapper;
 
 namespace LearningService
 {
@@ -27,8 +29,10 @@ namespace LearningService
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<LearningServiceContext>(options => options.UseNpgsql(connection));
+
+            services.AddDbContext<LearningServiceContext>(options => options.UseSqlServer(connection));
             services.AddScoped<ILearningEventsService, LearningEventsService>();
+            services.AddScoped<ILearningEventRepository, LearningEventRepository>();
             services.AddControllersWithViews();
         }
 
@@ -39,6 +43,8 @@ namespace LearningService
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");

@@ -9,6 +9,8 @@ namespace LearningService.Models
     {
         public long Id { get; set; }
 
+        public long WorkerId { get; set; }
+
         public long LearningEventId { get; set; }
 
         public string Feedback { get; set; }

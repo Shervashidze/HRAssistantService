@@ -10,6 +10,7 @@ namespace LearningService.Models
     {
         public DbSet<LearningEvent> LearningEvents { get; set; }
         public DbSet<Worker> Workers { get; set; }
+        public DbSet<Competence> Competence { get; set; }
 
         public LearningServiceContext(DbContextOptions options) : base(options)
         {

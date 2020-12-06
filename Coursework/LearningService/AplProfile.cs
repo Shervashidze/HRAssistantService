@@ -12,8 +12,8 @@ namespace LearningService
     {
         public AplProfile()
         {
-            CreateMap<LearningEvent, LearningEventView>()
-                .ForMember("Workers", c => c.MapFrom(cm => cm.Workers.Select(g => new Worker { })));
+            CreateMap<LearningEvent, LearningEventView>();
+            CreateMap<LearningEvent, LearningEventView>().ReverseMap();
         }
     }
 }

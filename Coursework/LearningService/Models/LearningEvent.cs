@@ -17,7 +17,7 @@ namespace LearningService.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? ActualDate { get; set; }
 
-        public List<int> CompetencesId { get; set; }
+        public List<Competence> CompetencesId { get; set; } = new List<Competence>();
 
         public List<Worker> Workers { get; set; } = new List<Worker>();
 
