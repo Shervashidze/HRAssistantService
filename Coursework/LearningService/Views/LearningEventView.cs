@@ -9,8 +9,6 @@ namespace LearningService.Views
 {
     public class LearningEventView
     {
-        public long Id { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PlannedDate { get; set; }

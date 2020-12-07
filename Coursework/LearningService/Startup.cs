@@ -32,7 +32,6 @@ namespace LearningService
 
             services.AddDbContext<LearningServiceContext>(options => options.UseSqlServer(connection));
             services.AddScoped<ILearningEventsService, LearningEventsService>();
-            services.AddScoped<ILearningEventRepository, LearningEventRepository>();
             services.AddControllersWithViews();
         }
 

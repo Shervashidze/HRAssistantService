@@ -9,22 +9,22 @@ namespace LearningService.Services
 {
     public class LearningEventsService : ILearningEventsService
     {
-        private readonly DbContext dbContext;
-        private readonly ILearningEventRepository _learningEventRepository;
-        public LearningEventsService(LearningServiceContext learningServiceContext, ILearningEventRepository learningEventRepository)
+        private readonly DbContext Context;
+        public LearningEventsService(LearningServiceContext learningServiceContext)
         {
-            dbContext = learningServiceContext;
-            _learningEventRepository = learningEventRepository;
+            Context = learningServiceContext;
         }
 
         public async Task<LearningEvent> GetEvent(long id)
         {
-            return await dbContext.Set<LearningEvent>().FindAsync(id);
+            return await Context.Set<LearningEvent>().FindAsync(id);
         }
 
         public async Task<long> AddLearningEventAsync(LearningEvent learningEvent)
         {
-            return await _learningEventRepository.AddAsync(learningEvent);
+            await Context.AddAsync(learningEvent);
+            await Context.SaveChangesAsync();
+            return learningEvent.Id;
         }
     }
 }

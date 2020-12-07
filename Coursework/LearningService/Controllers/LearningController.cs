@@ -17,11 +17,9 @@ namespace LearningService.Controllers
         private readonly ILearningEventsService _learningService;
         private readonly IMapper _mapper;
 
-        public LearningController(ILogger<LearningController> logger, ILearningEventsService learningService)
+        public LearningController(ILearningEventsService learningService)
         {
             _learningService = learningService;
-
-            _learningService.AddLearningEventAsync(new LearningEvent {Id = 3, MaxScore = 20, CompetencesId = null, ActualDate = new DateTime(2020, 12, 20, 8, 30 , 0), PlannedDate = new DateTime(2020, 12, 19, 8, 30, 0) });
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -33,14 +31,10 @@ namespace LearningService.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLearningEvent(int id)
         {
-            var groups = await _learningService.GetEvent(id);
-            return Ok(groups);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(42);
+            var eve = await _learningService.GetEvent(id);
+            return eve == null 
+                ? NotFound()
+                : Ok(eve) as IActionResult;
         }
 
         [HttpPost]
@@ -48,6 +42,7 @@ namespace LearningService.Controllers
         {
             var lEvent = _mapper.Map<LearningEvent>(learningEventView);
             var id = await _learningService.AddLearningEventAsync(lEvent).ConfigureAwait(false);
+            await GetLearningEvent((int) id);
             return Ok(id);
         }
     }
