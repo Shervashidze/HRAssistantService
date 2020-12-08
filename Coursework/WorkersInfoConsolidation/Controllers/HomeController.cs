@@ -5,13 +5,58 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkersInfoConsolidation.Services;
+using WorkersInfoConsolidation.Models.ViewModels;
+using AutoMapper;
 
 namespace WorkersInfoConsolidation.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : Controller
     {
+        private readonly IWorkersService workersService;
+        private readonly IMapper workersMapper;
+
+        public HomeController(IWorkersService workersService, IMapper workersMapper)
+        {
+            this.workersService = workersService;
+            this.workersMapper = workersMapper;
+        }
+
         public IActionResult Index()
             => View("Index");
-        
+
+        [HttpGet("Workers")]
+        public async Task<Worker[]> GetAll()
+        {
+            // var workers = await workersService.GetAllWorkers();
+            // return workersMapper.Map<CreateWorkerView[]>(workers);
+            return await workersService.GetAllWorkers();
+        }
+
+        [HttpPost("Add")]
+        public async Task<IActionResult> AddWorker([FromBody] CreateWorkerView workerView)
+        {
+            var worker = workersMapper.Map<Worker>(workerView);
+            var id = await workersService.AddWorkerAsync(worker);
+            return Ok(id);
+        }
+
+        [HttpGet("Worker/{id}")]
+        public async Task<IActionResult> GetWorker(int id)
+        {
+            var worker = await workersService.GetWorkerAsync(id);
+            return worker == null
+                ? NotFound()
+                : Ok(worker) as IActionResult;
+        }
+
+        [HttpDelete("workerId/{id}")]
+        public int DeleteWorker (int id)
+        {
+            return workersService.DeleteWorker(id);
+        }
     }
 }
+
