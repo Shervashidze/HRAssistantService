@@ -27,12 +27,14 @@ namespace WorkersInfoConsolidation
             
             services.AddScoped<IWorkersService, WorkersService>();
             
-            var mapConfig = new MapperConfiguration(cfg =>
+            var mapConfig = new MapperConfiguration(mapCfg =>
             {
-                cfg.AddProfile(new MappingProfile());
+                mapCfg.AddProfile(new MappingProfile());
             });
             IMapper mapper = mapConfig.CreateMapper();
             services.AddSingleton(mapper);
+            
+            services.AddCors();
 
             services.AddControllersWithViews();
         }
@@ -51,7 +53,12 @@ namespace WorkersInfoConsolidation
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
+            app.UseCors(builder =>builder
+                .WithOrigins("http://localhost:3000") // I allow it to call api from server where react runs
+                .AllowAnyMethod()
+                .AllowCredentials());
+            
             app.UseRouting();
 
             app.UseAuthorization();

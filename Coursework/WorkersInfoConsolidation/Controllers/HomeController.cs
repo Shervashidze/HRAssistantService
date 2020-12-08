@@ -52,7 +52,7 @@ namespace WorkersInfoConsolidation.Controllers
                 : Ok(worker) as IActionResult;
         }
 
-        [HttpDelete("workerId/{id}")]
+        [HttpDelete("Delete/{id}")]
         public int DeleteWorker (int id)
         {
             return workersService.DeleteWorker(id);
