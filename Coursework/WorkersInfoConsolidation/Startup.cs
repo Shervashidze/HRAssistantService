@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WorkersInfoConsolidation.Models;
 using Microsoft.EntityFrameworkCore;
+using WorkersInfoConsolidation.Services;
+using WorkersInfoConsolidation.Mappers;
+using AutoMapper;
 
 namespace WorkersInfoConsolidation
 {
@@ -22,15 +20,23 @@ namespace WorkersInfoConsolidation
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("ConnectionString");
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WorkersDbContext>(options => options.UseNpgsql(connectionString));
+            
+            services.AddScoped<IWorkersService, WorkersService>();
+            
+            var mapConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
