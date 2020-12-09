@@ -13,12 +13,12 @@ namespace WorkersInfoConsolidation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : Controller
+    public class WorkersController : Controller
     {
         private readonly IWorkersService workersService;
         private readonly IMapper workersMapper;
 
-        public HomeController(IWorkersService workersService, IMapper workersMapper)
+        public WorkersController(IWorkersService workersService, IMapper workersMapper)
         {
             this.workersService = workersService;
             this.workersMapper = workersMapper;
@@ -27,11 +27,9 @@ namespace WorkersInfoConsolidation.Controllers
         public IActionResult Index()
             => View("Index");
 
-        [HttpGet("Workers")]
+        [HttpGet("All")]
         public async Task<Worker[]> GetAll()
         {
-            // var workers = await workersService.GetAllWorkers();
-            // return workersMapper.Map<CreateWorkerView[]>(workers);
             return await workersService.GetAllWorkers();
         }
 
