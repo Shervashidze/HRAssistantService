@@ -1,42 +1,4 @@
-.worker-list {
-  width: 600px;
-}
-
-.avatar {
-  max-width: 100px;
-}
-
-.name {
-  padding-left: 10px;
-  max-width: 600px;
-}
-
-.factory {
-  padding-left: 30px;
-  max-width: 400px;
-}
-
-.department {
-  padding-left: 30px;
-  max-width: 400px;
-}
-
-.post {
-  padding-left: 30px;
-  max-width: 400px;
-}
-
-.staffCategory {
-  padding-left: 30px;
-  max-width: 400px;
-}
-
-.competenceLevel {
-  padding-left: 10px;
-  max-width: 400px;
-}
-
-
-.actions {
-  max-width: 100px;
+.workers-table {
+  padding-top: 5px;
+  transform: translatex(+3%);
 }

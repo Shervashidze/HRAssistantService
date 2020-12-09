@@ -1,8 +1,13 @@
 import React from 'react';
+import WorkersList from './WorkersList';
+import TopBar from './TopBar';
 
 function App() {
   return (
-    <h1>Hi</h1>
+    <React.Fragment>
+      <TopBar />
+      <WorkersList />
+    </React.Fragment>
   );
 }
 
