@@ -33,28 +33,27 @@ export default class WorkersList extends React.Component<any, IState>
         })
       const result = await fetch('https://localhost:5001/api/Workers/All');
       const workers = await result.json();
-      if (result.ok) {
         this.setState(
           {
           workers:workers,
           loading: false
           });
-      }
     }
 
     public render() {
         return (
           <div className="workers-table">
           <h3>Сотрудники</h3>
+          <div>Cписок сотрудников к обучению</div>
             <div className="table table-responsive table-hover ">
                 <table className="table-responsive">
                   <tbody>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Имя</th>
+                      <th scope="col">Производство</th>
                       <th scope="col">Подразделение</th>
                       <th scope="col">Должность</th>
-                      <th scope="col">Производство</th>
                     </tr>
                     {this.state.workers.map(worker =>
                         <WorkerRow key={worker.id} worker={worker} />)}
