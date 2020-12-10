@@ -37,6 +37,12 @@ namespace LearningService.Controllers
                 : Ok(eve) as IActionResult;
         }
 
+        [HttpGet]
+        public async Task<LearningEvent[]> All()
+        {
+            return await _learningService.GetAllEvents();
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateLearningEvent([FromBody] LearningEventView learningEventView)
         {

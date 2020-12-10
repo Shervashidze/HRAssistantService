@@ -26,5 +26,10 @@ namespace LearningService.Services
             await Context.SaveChangesAsync();
             return learningEvent.Id;
         }
+
+        public async Task<LearningEvent[]> GetAllEvents()
+        {
+            return await Context.Set<LearningEvent>().ToArrayAsync();
+        }
     }
 }
