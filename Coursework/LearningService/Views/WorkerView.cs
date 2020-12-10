@@ -16,5 +16,7 @@ namespace LearningService.Views
         public int? InitialScore { get; set; }
 
         public int? AfterwardsScore { get; set; }
+
+        public string Description { get; set; }
     }
 }

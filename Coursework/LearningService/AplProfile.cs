@@ -14,6 +14,8 @@ namespace LearningService
         {
             CreateMap<LearningEvent, LearningEventView>();
             CreateMap<LearningEvent, LearningEventView>().ReverseMap();
+            CreateMap<LearningEvent, EventRow>().ForMember("PlannedDate", cm => cm.MapFrom(c => c.PlannedDate.Day.ToString() + ":" + c.PlannedDate.Month.ToString() + ":" + c.PlannedDate.Year.ToString()));
+            CreateMap<LearningEvent, EventRow>().ReverseMap();
         }
     }
 }

@@ -9,13 +9,11 @@ namespace LearningService.Views
 {
     public class LearningEventView
     {
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime PlannedDate { get; set; }
+        public string Name { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? ActualDate { get; set; }
+        public DateTime PlannedDate { get; set; }
 
         public List<int> CompetencesId { get; set; }
 

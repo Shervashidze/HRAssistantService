@@ -38,9 +38,29 @@ namespace LearningService.Controllers
         }
 
         [HttpGet]
-        public async Task<LearningEvent[]> All()
+        public async Task<EventRow[]> All()
         {
-            return await _learningService.GetAllEvents();
+            var events = await _learningService.GetAllEvents();
+            var rows = _mapper.Map<EventRow[]>(events);
+            foreach (var r in rows)
+            { 
+                r.Capacity = "42%";
+            }
+
+            return rows;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateEvent(int id, [FromBody] LearningEventView learningEventView)
+        { 
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteEvent(int id)
+        {
+            await _learningService.DeleteEvent(id);
+            return Ok();
         }
 
         [HttpPost]

@@ -27,6 +27,21 @@ namespace LearningService.Services
             return learningEvent.Id;
         }
 
+        public async Task<bool> Update(long id, LearningEvent learningEvent)
+        {
+            var ev = await this.GetEvent(id);
+            await Context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteEvent(long id)
+        {
+            var ev = await GetEvent(id);
+            Context.Set<LearningEvent>().Remove(ev);
+            Context.SaveChanges();
+            return true;
+        }
+
         public async Task<LearningEvent[]> GetAllEvents()
         {
             return await Context.Set<LearningEvent>().ToArrayAsync();
