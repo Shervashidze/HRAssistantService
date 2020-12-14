@@ -24,9 +24,6 @@ namespace WorkersInfoConsolidation.Controllers
             this.workersMapper = workersMapper;
         }
 
-        public IActionResult Index()
-            => View("Index");
-
         [HttpGet("All")]
         public async Task<Worker[]> GetAll()
         {
