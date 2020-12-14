@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap';
-import logoGN from './imgs/logoGN.png'
+import logoGN from '../imgs/logoGN.png'
 
 export default class TopBar extends React.Component<any, any>{
   public render() {

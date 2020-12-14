@@ -6,15 +6,15 @@ export default class TopBar extends React.Component<any, any>{
     return(
       <Navbar bg="white" variant="light" expand="lg">
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav variant="tabs" className="justify-content-center bg-wight m-auto" activeKey="/workers">
+          <Nav variant="tabs" className="justify-content-center bg-wight m-auto" activeKey={window.location.pathname}>
             <Nav.Item>
-              <Nav.Link href="/workers">Сотрудники</Nav.Link>
+              <Nav.Link href="/workers" eventKey="/workers">Сотрудники</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/learning" eventKey="link-1">Обучение</Nav.Link>
+              <Nav.Link href="/learning" eventKey="/learning">Обучение</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/dashboards" eventKey="link-2">Дэшборды</Nav.Link>
+              <Nav.Link href="/dashboards" eventKey="/dashboards">Дэшборды</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="link-3">Данные о производстве</Nav.Link>

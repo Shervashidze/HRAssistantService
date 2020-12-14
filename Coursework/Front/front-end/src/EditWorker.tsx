@@ -1,7 +1,7 @@
 import React from 'react';
 
-import TopBar from './TopBar';
-import NavBar from './NavBar';
+import TopBar from './components/TopBar';
+import NavBar from './components/NavBar';
 
 export default class EditWorker extends React.Component<any, any> {
   public render() {

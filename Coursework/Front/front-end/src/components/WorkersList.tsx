@@ -1,5 +1,5 @@
 import * as React from "react";
-import WorkerRow from "./components/WorkerRow"
+import WorkerRow from "./WorkerRow"
 
 export interface IWorker {
     id: number,
