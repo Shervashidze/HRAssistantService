@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LearningService
+namespace LearningEvents
 {
     public class Program
     {

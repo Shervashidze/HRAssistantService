@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LearningService.Views
+namespace LearningEvents.Views
 {
     public class EventRow
     {

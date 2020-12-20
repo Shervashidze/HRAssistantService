@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using LearningService.Models;
+using LearningEvents.Models;
 
-namespace LearningService.Views
+namespace LearningEvents.Views
 {
     public class LearningEventView
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LearningService.Models
+namespace LearningEvents.Models
 {
     public class LearningEvent
     {

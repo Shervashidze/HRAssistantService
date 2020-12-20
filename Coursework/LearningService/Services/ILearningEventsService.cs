@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LearningService.Models;
+using LearningEvents.Models;
 
-namespace LearningService.Services
+namespace LearningEvents.Services
 {
     public interface ILearningEventsService
     {
