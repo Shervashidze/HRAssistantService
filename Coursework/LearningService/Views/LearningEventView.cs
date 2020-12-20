@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using LearningService.Models;
 
-namespace LearningService.Models
+namespace LearningService.Views
 {
-    public class LearningEvent
+    public class LearningEventView
     {
-        [Key]
         public long Id { get; set; }
 
         public string Name { get; set; }
@@ -17,7 +19,7 @@ namespace LearningService.Models
 
         public List<Competence> CompetencesId { get; set; } = new List<Competence>();
 
-        public List<Worker> Workers { get; set; } = new List<Worker>();
+        public List<WorkerView> Workers { get; set; } = new List<WorkerView>();
 
         public int MaxScore { get; set; }
 

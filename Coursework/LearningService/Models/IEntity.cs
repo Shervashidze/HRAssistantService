@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace LearningService.Models
 {
-    public class Class1
+    public interface IEntity
     {
+        long Id { get; set; }
     }
 }
