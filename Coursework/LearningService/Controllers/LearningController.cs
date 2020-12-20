@@ -38,13 +38,28 @@ namespace LearningService.Controllers
         }
 
         [HttpGet]
-        public async Task<EventRow[]> All()
+        public async Task<EventRow[]> GetAll()
         {
             var events = await _learningService.GetAllEvents();
             var rows = _mapper.Map<EventRow[]>(events);
-            foreach (var r in rows)
-            { 
-                r.Capacity = "42%";
+            for (int i = 0; i < events.Length; i++)
+            {
+                int completed = 0;
+                foreach (var worker in events[i].Workers)
+                {
+                    if (worker.AfterwardsScore != null)
+                    {
+                        completed++;
+                    }
+                }
+
+                if (events[i].Workers.Count == 0)
+                {
+                    rows[i].Capacity = "0 %";
+                } else
+                {
+                    rows[i].Capacity = (double) completed / events[i].Workers.Count + " %";
+                }
             }
 
             return rows;
@@ -52,7 +67,8 @@ namespace LearningService.Controllers
 
         [HttpPost]
         public async Task<IActionResult> UpdateEvent(int id, [FromBody] LearningEventView learningEventView)
-        { 
+        {
+            await _learningService.Update(id, _mapper.Map<LearningEvent>(learningEventView));
             return Ok();
         }
 

@@ -30,6 +30,12 @@ namespace LearningService.Services
         public async Task<bool> Update(long id, LearningEvent learningEvent)
         {
             var ev = await this.GetEvent(id);
+            ev.Workers = learningEvent.Workers;
+            ev.MaxScore = learningEvent.MaxScore;
+            ev.Name = learningEvent.Name;
+            ev.PlannedDate = learningEvent.PlannedDate;
+            ev.Description = learningEvent.Description;
+            ev.CompetencesId = learningEvent.CompetencesId;
             await Context.SaveChangesAsync();
             return true;
         }
