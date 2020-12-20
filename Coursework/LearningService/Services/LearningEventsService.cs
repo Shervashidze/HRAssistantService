@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LearningService.Models;
+using LearningEvents.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LearningService.Services
+namespace LearningEvents.Services
 {
     public class LearningEventsService : ILearningEventsService
     {
@@ -29,7 +29,7 @@ namespace LearningService.Services
 
         public async Task<bool> Update(long id, LearningEvent learningEvent)
         {
-            var ev = await this.GetEvent(id);
+            var ev = await GetEvent(id);
             ev.Workers = learningEvent.Workers;
             ev.MaxScore = learningEvent.MaxScore;
             ev.Name = learningEvent.Name;

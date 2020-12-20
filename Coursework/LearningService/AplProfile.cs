@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using LearningService.Views;
-using LearningService.Models;
+using LearningEvents.Views;
+using LearningEvents.Models;
 
-namespace LearningService
+namespace LearningEvents
 {
     public class AplProfile : Profile
     {

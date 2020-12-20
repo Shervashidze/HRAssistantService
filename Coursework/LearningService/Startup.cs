@@ -9,12 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LearningService.Models;
-using LearningService.Services;
+using LearningEvents.Models;
 using Npgsql;
 using AutoMapper;
+using LearningEvents.Services;
 
-namespace LearningService
+namespace LearningEvents
 {
     public class Startup
     {

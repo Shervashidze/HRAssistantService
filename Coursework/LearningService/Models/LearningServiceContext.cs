@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LearningEvents.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace LearningService.Models
+namespace LearningEvents.Models
 {
     public class LearningServiceContext : DbContext
     {

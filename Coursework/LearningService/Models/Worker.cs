@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LearningService.Models
+namespace LearningEvents.Models
 {
     public class Worker
     {

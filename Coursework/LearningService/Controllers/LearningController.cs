@@ -1,16 +1,16 @@
-﻿using LearningService.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using LearningService.Services;
 using AutoMapper;
-using LearningService.Views;
+using LearningEvents.Views;
+using LearningEvents.Services;
+using LearningEvents.Models;
 
-namespace LearningService.Controllers
+namespace LearningEvents.Controllers
 {
     public class LearningController : Controller
     {
@@ -32,7 +32,7 @@ namespace LearningService.Controllers
         public async Task<IActionResult> GetLearningEvent(int id)
         {
             var eve = await _learningService.GetEvent(id);
-            return eve == null 
+            return eve == null
                 ? NotFound()
                 : Ok(eve) as IActionResult;
         }
@@ -56,9 +56,10 @@ namespace LearningService.Controllers
                 if (events[i].Workers.Count == 0)
                 {
                     rows[i].Capacity = "0 %";
-                } else
+                }
+                else
                 {
-                    rows[i].Capacity = (double) completed / events[i].Workers.Count + " %";
+                    rows[i].Capacity = (double)completed / events[i].Workers.Count + " %";
                 }
             }
 
@@ -84,7 +85,7 @@ namespace LearningService.Controllers
         {
             var lEvent = _mapper.Map<LearningEvent>(learningEventView);
             var id = await _learningService.AddLearningEventAsync(lEvent).ConfigureAwait(false);
-            await GetLearningEvent((int) id);
+            await GetLearningEvent((int)id);
             return Ok(id);
         }
     }
