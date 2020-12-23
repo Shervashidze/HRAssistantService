@@ -10,7 +10,7 @@
 # WorkersInfoConsolidation
 Микросервис для консолидации данных о сотрудниках.
 Требует PostgreSQL базы данных.
-По умолчанию находится на 5001 порту, доступ через https://localhost:5001/Workers
+По умолчанию находится на 5001 порту, доступ через https://localhost:5001/api/Workers
 
 # Фронтенд
 Макет фронтенда. Сделан с помощью Facebook create react app. 
