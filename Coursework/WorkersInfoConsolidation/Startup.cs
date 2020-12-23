@@ -1,17 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Coursework.Models;
+using WorkersInfoConsolidation.Models;
 using Microsoft.EntityFrameworkCore;
+using WorkersInfoConsolidation.Services;
+using WorkersInfoConsolidation.Mappers;
+using AutoMapper;
 
-namespace Coursework
+namespace WorkersInfoConsolidation
 {
     public class Startup
     {
@@ -22,15 +20,25 @@ namespace Coursework
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("ConnectionString");
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WorkersDbContext>(options => options.UseNpgsql(connectionString));
+            
+            services.AddScoped<IWorkersService, WorkersService>();
+            
+            var mapConfig = new MapperConfiguration(mapCfg =>
+            {
+                mapCfg.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            
+            services.AddCors();
+
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -45,7 +53,12 @@ namespace Coursework
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
+            app.UseCors(builder =>builder
+                .WithOrigins("http://localhost:3000") // I allow it to call api from server where react runs
+                .AllowAnyMethod()
+                .AllowCredentials());
+            
             app.UseRouting();
 
             app.UseAuthorization();

@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Coursework.Models
+namespace WorkersInfoConsolidation.Models
 {
     public class Worker : IEntity<int>
     {
+        [Key]
         public int Id { get; set; }
-        public string PersonnelNumber { get; set; } // Табельный номер
+        public string Name { get; set; } // ФИО
         public string PhoneNumber { get; set; }
 
-        public int DepartmentId { get; set; } // id Подразделения
-        public int PostId { get; set; } // id Должности
-        public int StaffCategoryId { get; set; } // id Категории персонала
-        public int StaffTypeId { get; set; } // id Вида персонала
-        public int SecurityGroup { get; set; } // Группа по эл. безопасности
+        public string Department { get; set; } // Подразделения
+        public string Post { get; set; } // Должности
+        public string StaffCategory { get; set; } // Категории персонала
+        public string StaffType { get; set; } // id Вида персонала
 
-        public string Name { get; set; } // ФИО
+        
         public string Factory { get; set; } // Производство
         
         [DataType(DataType.Date)]
