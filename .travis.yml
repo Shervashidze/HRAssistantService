@@ -7,4 +7,4 @@ env:
         - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 script:
-    - dotnet build FSharpWebAppWithCIDemo.sln -c Release
+    - dotnet build HRAssistantApl.sln -c Release
