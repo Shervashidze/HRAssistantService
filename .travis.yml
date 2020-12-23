@@ -1,4 +1,4 @@
 language: csharp
-solution: HRAssistantApl.sln
+solution: ./src/Coursework/HRAssistantApl.sln
 mono:
   - latest
