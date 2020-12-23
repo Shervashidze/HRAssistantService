@@ -9,5 +9,7 @@ namespace WorkersInfoConsolidation.Models
     {
         public int Id { get; set; }
         public string CompetenceName { get; set; }
+        public List<int> WorkersIdsList { get; set; }
+
     }
 }
