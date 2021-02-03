@@ -1,4 +1,5 @@
 import * as React from "react";
+import { MDBDataTable } from 'mdbreact';
 import WorkerRow from "./WorkerRow"
 
 export interface IWorker {
@@ -25,7 +26,6 @@ export default class WorkersList extends React.Component<any, IState>
     loading: false,
     "workers": []
   };
-
     public async componentDidMount() {
       this.setState(
         {
@@ -41,28 +41,47 @@ export default class WorkersList extends React.Component<any, IState>
     }
 
     public render() {
+      const data = {
+        columns: [
+          {
+            label: 'Имя',
+            field: 'name',
+            sort: 'asc',
+            width: 75
+          },
+          {
+            label: 'Производство',
+            field: 'factory',
+            sort: 'asc',
+            width: 135
+          },
+          {
+            label: 'Подразделение',
+            field: 'department',
+            sort: 'asc',
+            width: 100
+          },
+          {
+            label: 'Должность',
+            field: 'post',
+            sort: 'asc',
+            width: 50
+          }
+        ],
+        rows: this.state.workers
+      };
+
         return (
-          <div className="workers-table">
-          <h3>Сотрудники</h3>
-          <div>Cписок сотрудников к обучению</div>
-            <div className="table table-responsive table-hover col-xs-1">
-                <table className="table-responsive">
-                  <tbody>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Имя</th>
-                      <th scope="col">Производство</th>
-                      <th scope="col">Подразделение</th>
-                      <th scope="col">Должность</th>
-                      <th scope="col">Тип персонала</th>
-                    </tr>
-                    {this.state.workers.map(worker =>
-                        <WorkerRow key={worker.id} worker={worker} />)}
-                  </tbody>
-                </table>
-                {this.state.loading && <div>Loading...</div>}
-            </div>
+          <>
+          <div className='body-custom'>
+          <MDBDataTable
+          autoWidth
+            striped
+            bordered
+            small
+            data={data}
+          />
           </div>
-        );
+        </>);
     }
 }

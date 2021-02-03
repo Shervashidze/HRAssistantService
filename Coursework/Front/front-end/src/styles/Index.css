@@ -4,8 +4,30 @@ body {
     font-family: 'Open Sans', sans-serif!important;
 }
 
+.body-custom {
+  padding: 2%;
+}
+
+.card-img-top {
+    width: 20%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#worker-card {
+  margin-top: 80px;
+  width: 30%;
+  height: 573px;
+}
+
+.rowC {
+  display:flex;
+  flex-direction:row;
+  flex-shrink: 3;
+}
+
 .workers-table {
-  padding-top: 5px;
+  padding-top: 5%;
   transform: translatex(+1%);
 }
 
