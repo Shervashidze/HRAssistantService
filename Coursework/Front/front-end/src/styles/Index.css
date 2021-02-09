@@ -15,6 +15,8 @@ body {
 }
 
 #worker-card {
+  position: fixed; right: 3%;
+  position: fixed; top: 10%;
   margin-top: 80px;
   width: 30%;
   height: 573px;
@@ -26,10 +28,6 @@ body {
   flex-shrink: 3;
 }
 
-.workers-table {
-  padding-top: 5%;
-  transform: translatex(+1%);
-}
 
 .dropdown {
   position: absolute;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { MDBDataTable } from 'mdbreact';
-import WorkerRow from "./WorkerRow"
+
 
 export interface IWorker {
     id: number,

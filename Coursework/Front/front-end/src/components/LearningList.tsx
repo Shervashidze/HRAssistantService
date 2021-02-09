@@ -1,19 +1,18 @@
-import * as React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import EventRow from './eventrow';
+import * as React from "react";
+import { MDBDataTable } from 'mdbreact';
 
-
-interface IState {
+export interface IState {
     loading: boolean;
     events: IEvent[];
 }
 
-interface IEvent {
+export interface IEvent {
     id: number,
     name: string,
-    capacity: string
+    capacity: string,
     description: string,
-    plannedDate: string;
+    plannedDate: string,
+    [key: string]: any
 }
 
 export default class LearningList extends React.Component<any, IState> {
@@ -28,38 +27,58 @@ export default class LearningList extends React.Component<any, IState> {
           {
             loading:true
           })
-        const result = await fetch('https://localhost:8001/Learning/All');
-        const workers = await result.json();
-          this.setState(
-            {
-            events:workers,
+        const result = await fetch('https://localhost:8001/Learning/GetAll');
+        const events = await result.json();
+        this.setState(
+          {
+            events: events,
             loading: false
-            });
+          });
       }
 
 
     public render() {
+      this.state.events.forEach(element => 
+        element.clickEvent = () => window.location.href = "http://localhost:3000/learning/" + element.id)
+      const data = {
+        columns: [
+          {
+            label: 'Название',
+            field: 'name',
+            sort: 'asc',
+            width: 75
+          },
+          {
+            label: 'Прогресс',
+            field: 'capacity',
+            sort: 'asc',
+            width: 135
+          },
+          {
+            label: 'Описание',
+            field: 'description',
+            sort: 'asc',
+            width: 300
+          },
+          {
+            label: 'Планируемая дата обучения',
+            field: 'plannedDate',
+            sort: 'asc',
+            width: 100
+          }
+        ],
+        rows: this.state.events
+      };
+
         return (
-          <div className="events-table">
-          <h3>"Производство"</h3>
-          <div>Cписок запланнированных обучений</div>
-            <div className="table table-responsive table-hover ">
-                <table className="table-responsive">
-                  <tbody>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Название</th>
-                      <th scope="col">Прогресс</th>
-                      <th scope="col">Описание</th>
-                      <th scope="col">Планируемая дата</th>
-                    </tr>
-                    {this.state.events.map(event =>
-                        <EventRow key={event.id} event={event} />)}
-                  </tbody>
-                </table>
-                {this.state.loading && <div>Loading...</div>}
-            </div>
+          <>
+          <div className='body-custom'>
+          <MDBDataTable
+          striped
+          bordered
+          data = {data}
+          />
           </div>
-        );
+        </>);
     }
 }
