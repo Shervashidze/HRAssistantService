@@ -1,0 +1,48 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/account/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account/login",
+      "UpstreamhttpsMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Workers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/WorkersInfo/",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/Workers/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/WorkersInfo/{id}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}
