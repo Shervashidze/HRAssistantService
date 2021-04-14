@@ -1,5 +1,7 @@
 import * as React from "react";
 import WorkerRow from "./components/WorkerRow"
+//import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+//import 'rsuite-table/lib/less/index.less';
 
 export interface IWorker {
     id: number,
@@ -39,7 +41,7 @@ export default class WorkersList extends React.Component<any, IState>
           loading: false
           });
     }
-
+    
     public render() {
         return (
           <div className="workers-table">

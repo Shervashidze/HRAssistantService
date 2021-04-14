@@ -23,17 +23,7 @@ export default class WorkerCard extends React.Component<any, IState>
 {
   public state: IState = {
     loading: false,
-    "worker":
-    {id: 1,
-    name: "Андреев Антон Иванович",
-    phoneNumber: "88123538933",
-    department: "Нефтяной-район №2",
-    post: "Машинист буровой установки",
-    staffCategory: "Инженерно-технический",
-    staffType: "Оперативно-ремонтный",
-    factory: "ПрЭО «Ямал»",
-    dateOfBirth: "1982-10-13",
-    competenceIdsList: []}
+    "worker": {} as IWorker
   };
 
   public async componentDidMount() {
@@ -41,11 +31,12 @@ export default class WorkerCard extends React.Component<any, IState>
       {
         loading:true
       })
-    const result = await fetch('https://localhost:5001/api/Worker/1');
+
+    const result = await fetch('https://localhost:5001/api/Workers/Worker/4');
     const worker = await result.json();
       this.setState(
         {
-        worker:worker,
+        worker: worker,
         loading: false
         });
   }
@@ -61,7 +52,7 @@ export default class WorkerCard extends React.Component<any, IState>
           <h5 className='card-title'>{this.state.worker.name}</h5>
           <p className='card-text'>
           <ul className=''>
-          <li className=''>{this.state.worker.post}</li>
+          <li className=''>Должность: {this.state.worker.post}</li>
           <li className=''>Телефон: {this.state.worker.phoneNumber}</li>
           <li className=''>Дата рождения: {this.state.worker.dateOfBirth}</li>
           <li className=''>Производство: {this.state.worker.factory}</li>
@@ -69,6 +60,7 @@ export default class WorkerCard extends React.Component<any, IState>
           <li className=''>Категория персонала: {this.state.worker.staffCategory}</li>
           <li className=''>Тип персонала: {this.state.worker.staffType}</li>
           </ul>
+          {this.state.loading && <div>Loading...</div>}
           </p>
           <a href="/learning" className="card-link  justify-content-center">Обучение</a>
           <a href="/learning" className="card-link  justify-content-center">Курсы</a>

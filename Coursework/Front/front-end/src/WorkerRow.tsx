@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Component } from 'react'
+//import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+//import 'rsuite-table/lib/less/index.less';
 
 export default class WorkerRow extends React.Component<any, any>{
   deleteRow() {
@@ -9,9 +11,20 @@ export default class WorkerRow extends React.Component<any, any>{
     });
   }
 
+  public async fetchWorkerDetails () {
+    const result = await fetch('https://localhost:5001/api/Workers/3');
+    const workers = await result.json();
+    console.log(workers);
+      this.setState(
+        {
+        workers: workers,
+        loading: false
+        });
+  }
+
     public render() {
         return (
-          <tr>
+          <tr onClick={() => this.fetchWorkerDetails()}>
             <td className="id">{this.props.worker.id}</td>
             <td className="name">{this.props.worker.name}</td>
             <td className="factory">{this.props.worker.factory}</td>
