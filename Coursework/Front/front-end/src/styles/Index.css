@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+.body-custom {
+  padding: 2%;
+}
+
+.card-img-top {
+    width: 20%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.account {
+  align-self: left;
+}
+
+#worker-card {
+  float:right;
+  margin-top: 80px;
+  width: 30%;
+  height: 573px;
+}
+
+.rowC {
+  display:flex;
+  flex-direction:row;
+  flex: 1;
+}
+
+.workers-table {
+  padding-top: 5%;
+  transform: translatex(+1%);
+}
+
+.dropdown {
+  position: absolute;
+}
