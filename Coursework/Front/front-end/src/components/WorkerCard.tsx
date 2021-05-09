@@ -1,5 +1,7 @@
 import * as React from "react";
+import { isBindingName } from "typescript";
 import emptyAvatar from '../imgs/avatar.png'
+
 
 export interface IWorker {
     id: number,
@@ -21,6 +23,7 @@ export interface IState {
 
 export default class WorkerCard extends React.Component<any, IState>
 {
+
   public state: IState = {
     loading: false,
     "worker": {} as IWorker
@@ -32,7 +35,8 @@ export default class WorkerCard extends React.Component<any, IState>
         loading:true
       })
 
-    const result = await fetch('https://localhost:5001/api/Workers/Worker/4');
+    const path = 'https://localhost:5001/api/Workers/Worker/4';
+    const result = await fetch(path);
     const worker = await result.json();
       this.setState(
         {
@@ -41,6 +45,16 @@ export default class WorkerCard extends React.Component<any, IState>
         });
   }
 
+  // public async handleTableClick(path:string){
+  //   const result = await fetch(path);
+  //   const worker = await result.json();
+  //     this.setState(
+  //       {
+  //       worker: worker,
+  //       loading: false
+  //       });
+  // }
+  
   public render() {
     return(
       <div id='worker-card' className='card'>

@@ -1,19 +1,19 @@
 import * as React from "react";
 import WorkerRow from "./components/WorkerRow"
-//import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-//import 'rsuite-table/lib/less/index.less';
+import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import 'rsuite-table/lib/less/index.less';
 
 export interface IWorker {
-    id: number,
-    name: string,
-    phoneNumber: string,
-    department: string,
-    post: string,
-    staffCategory: string,
-    staffType: string,
-    factory: string,
-    dateOfBirth: string,
-    competenceIdsList: [];
+    id?: number,
+    name?: string,
+    phoneNumber?: string,
+    department?: string,
+    post?: string,
+    staffCategory?: string,
+    staffType?: string,
+    factory?: string,
+    dateOfBirth?: string,
+    competenceIdsList?: [];
 }
 
 export interface IState {

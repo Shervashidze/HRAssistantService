@@ -5,6 +5,7 @@ import WorkersPage from './WorkersPage';
 import LearningPage from "./LearningPage"
 import DashboardsPage from "./DashboardsPage"
 import EditWorker from './EditWorker';
+import AccountPage from './AccountPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/workers" component={WorkersPage} />
         <Route exact path="/learning" component={LearningPage} />
         <Route exact path="/dashboards" component={DashboardsPage} />
+        <Route exact path="/account" component={AccountPage} />
       </Router>
     </React.Fragment>
   );

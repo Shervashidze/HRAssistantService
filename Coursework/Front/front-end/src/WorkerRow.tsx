@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Component } from 'react'
-//import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-//import 'rsuite-table/lib/less/index.less';
+import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import 'rsuite-table/lib/less/index.less';
 
 export default class WorkerRow extends React.Component<any, any>{
   deleteRow() {
