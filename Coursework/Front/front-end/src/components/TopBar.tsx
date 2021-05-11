@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap';
+import { NavLink } from "react-router-dom";
 import logoGN from '../imgs/logoGN.png'
 
 export default class TopBar extends React.Component<any, any>{
@@ -17,10 +18,12 @@ export default class TopBar extends React.Component<any, any>{
           <NavDropdown title="Аккаунт" id="nav-dropdown">
             <NavDropdown.Header>"Мое имя"</NavDropdown.Header>
               <NavDropdown.Item eventKey="4.1">Уведомления</NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.2">Управление аккаунтом</NavDropdown.Item>
+              <NavDropdown.Item href="/account" eventKey="/account">Управление аккаунтом</NavDropdown.Item>
               <NavDropdown.Item eventKey="4.3">Календарь обучения</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item eventKey="4.4">Выйти</NavDropdown.Item>
+              <NavDropdown.Item href="/logout" eventKey="/logout">
+                  Выйти
+              </NavDropdown.Item>
           </NavDropdown>
         </nav>
     )

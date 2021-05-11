@@ -4,7 +4,6 @@ import TopBar from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
 import { MDBDataTable } from 'mdbreact';
-import { Console } from 'console';
 
 
 export interface IState {
@@ -56,6 +55,7 @@ export default class blankPage extends React.Component<any, IState> {
         const a = this.props.match.params.id;
         const result = await fetch('https://localhost:8001/Learning/GetLearningEvent/' + a);
         const event = await result.json();
+        console.log(event.workers)
         this.setState(
             {
               event: event,

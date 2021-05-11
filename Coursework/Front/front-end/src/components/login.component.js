@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import AuthService from "../services/auth.service";
+import { Redirect } from 'react-router-dom';
+import { FormGroup } from "react-bootstrap";
+import jwt_decode from "jwt-decode";
+import {useDispatch, useSelector} from "react-redux"
 
 const required = value => {
   if (!value) {
@@ -15,134 +17,144 @@ const required = value => {
   }
 };
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+async function login(em, pas) {
+  const b = JSON.stringify({
+    email: em, 
+    password: pas
+  });
+  var result = await fetch('https://localhost:4001/api/account/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: b
+  });
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+  return result;
+};
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
+const CreateLoginPage = () => {
+  const dispatch = useDispatch()
+  const [username, setUsername] = useState("") 
+  const [password, setPassword] = useState("") 
+  const { message, setMessage } = useState("")
+  const { isLoggedIn, setLogged } = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  handleLogin(e) {
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+
+  const form = useRef();
+  const checkBtn = useRef();
+
+
+  async function handleLogin(e) {
     e.preventDefault();
 
-    this.setState({
-      message: "",
-      loading: true
-    });
+    setLoading(true)
 
-    this.form.validateAll();
+    form.current.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push("/profile");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+    if (checkBtn.current.context._errors.length === 0) {
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
+      var a = await login(username, password)
+      if (a.status == 200) {
+        let data = await a.text()
+        let decoded = jwt_decode(data)
+        let role = {
+          "type": "loginstatus/login",
+          "payload": decoded._role
         }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
+        let user = {
+          "type": "loginstatus/setusername",
+          "payload": username
+        }
+        let token = {
+          "type": "loginstatus/tokenize",
+          "payload": data
+        }
+        dispatch(role)
+        dispatch(user)
+        dispatch(token)        
+      }
+
+      else if (a.status == 415) {
+        this.setState({
+          loading: false,
+          message: "Network Error"
+        });
+      }
+      else {
+        
+      }
     }
   }
 
-  render() {
-    return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          
+  return (
+      <div className="" id="LoginTable">
+        { isLoggedIn ? (<Redirect push to="/info"/>) : null }
+        <div className="">
 
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
+          <Form onSubmit={handleLogin} ref={form}>
             <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
+              <label htmlFor="username">Имя пользователя</label>
+              <input
                 type="text"
                 className="form-control"
                 name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
+                value={username}
+                onChange={onChangeUsername}
                 validations={[required]}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
+            <FormGroup>
+              <label htmlFor="password">Пароль</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  value={password}
+                  onChange={onChangePassword}
+                  validations={[required]}
+                />
+            </FormGroup>
+
 
             <div className="form-group">
               <button
                 className="btn btn-primary btn-block"
-                disabled={this.state.loading}
+                disabled={loading}
               >
-                {this.state.loading && (
+                {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
                 )}
                 <span>Login</span>
               </button>
             </div>
 
-            {this.state.message && (
+            {message && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">
-                  {this.state.message}
+                  {message}
                 </div>
               </div>
             )}
             <CheckButton
               style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
+              ref={checkBtn}
             />
           </Form>
         </div>
       </div>
-    );
-  }
+    )
 }
+
+export default CreateLoginPage;

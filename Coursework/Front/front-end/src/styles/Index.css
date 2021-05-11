@@ -9,8 +9,9 @@ body {
 }
 
 .card-img-top {
-    width: 20%;
+    width: 45%;
     height: 200px;
+    align-self: center;
     object-fit: cover;
 }
 
@@ -30,5 +31,42 @@ body {
 
 
 .dropdown {
-  position: absolute;
+  align-self: flex-end;
+}
+
+
+#loginId {
+  width: 20%;
+  height: 20%;
+}
+
+#Login {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  height: 573px;
+}
+
+#LoginTable {
+  border:none;
+  width: 100%;
+}
+
+#logintext {
+  width: 100%;
+  height: 55px;
+  background-color:white;
+  border:none;
+  resize: none;
+  word-break: break-word;
+}
+
+#loginIm {
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height: 21%;
 }

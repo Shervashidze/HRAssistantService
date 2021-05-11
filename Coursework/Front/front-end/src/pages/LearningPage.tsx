@@ -19,7 +19,7 @@ export default class LearningPage extends React.Component<any, any> {
     return(
       <>
       <Route path="/products/:eventId" component={BlankPage} />
-      <TopBar />
+
       <NavBar />
       <LearningList />
       </>

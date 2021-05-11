@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+#name {
+    padding:1ch;
+}
+
+#list{
+    float:right;
+    padding-right: 32%;
+}
+
+#pic {
+    padding-left: 0%;
+    width: 20%;
+    height: 100%;
+
+    border-style: solid;
+    border-color:aliceblue;
+
+}
+#parent{
+    padding: 1%;
+    border-color:aliceblue;
+    border-style: solid;
+    border-top-width: 0ch;
+    border-bottom-width: 0.25ch;
+    border-bottom-color:rgba(154, 167, 167, 0.829);
+}

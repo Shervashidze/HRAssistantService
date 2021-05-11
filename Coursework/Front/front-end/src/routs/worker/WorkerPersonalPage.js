@@ -1,0 +1,60 @@
+import { CreateTopBar} from './Topbar'
+import { selectLoginstatus, login, unlog } from '../../slicers/slicer'
+import { useSelector } from 'react-redux'
+import { useState, useEffect, useCallback } from 'react'
+import AccountPage from '../../pages/AccountPage'
+import emptyAvatar from '../../imgs/avatar_1.png'
+import './style.css'
+
+
+export function CreateInfoPage() {
+    const log = useSelector(selectLoginstatus)
+    const [name, setName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [department, setDepartmenr] = useState("")
+    const [post, setPost] = useState("")
+    const [staffCategory, setStaffCategory] = useState("")
+    const [factory, setFactory] = useState("")
+    const [dateOfBirth, setDateOfBirth] = useState("")
+    const [mail, setMail] = useState("")
+    const [staffType, setStaffType] = useState("")
+    
+
+    const fetchdata = useCallback(async () => {
+        let result = await fetch('https://localhost:5001/api/Workers/Worker/1');
+        let worker = await result.json();
+        console.log(worker)
+        setName(worker.name)
+        setPhoneNumber(worker.phoneNumber)
+        setDepartmenr(worker.department)
+        setPost(worker.post)
+        setStaffCategory(worker.staffCategory)
+        setFactory(worker.factory)
+        setDateOfBirth(worker.dateOfBirth)
+        setMail(log.username)
+        setStaffType(worker.staffType)
+    }, [])
+
+    useEffect(() => {
+        fetchdata()
+    }, [fetchdata])
+
+
+    return(<div>
+        <div id="parent">
+            <div id="name">{name}</div>
+            <img src={emptyAvatar} id ="pic"/>
+            <div id="list">
+                <li className=''>Должность: {post}</li>
+                <li className=''>Телефон: {phoneNumber}</li>
+                <li className=''>Дата рождения: {dateOfBirth}</li>
+                <li className=''>Производство: {factory}</li>
+                <li className=''>Подразделение: {department}</li>
+                <li className=''>Категория персонала: {staffCategory}</li>
+                <li className=''>Тип персонала: {staffType}</li>
+                <li className=''>Почта: {mail}</li>
+            </div>
+            
+        </div>
+    </div>)
+}
