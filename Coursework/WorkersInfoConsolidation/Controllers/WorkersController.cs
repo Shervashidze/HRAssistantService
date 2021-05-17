@@ -49,6 +49,15 @@ namespace WorkersInfoConsolidation.Controllers
                 : Ok(worker) as IActionResult;
         }
 
+        [HttpGet("WorkerByEmail/{email}")]
+        public async Task<IActionResult> GetWorkerByEmail(string email)
+        {
+            var worker = await workersService.GetWorkerByEmailAsync(email);
+            return worker == null
+                ? NotFound()
+                : Ok(worker) as IActionResult;
+        }
+
         [HttpDelete("Delete/{id}")]
         public int DeleteWorker (int id)
         {

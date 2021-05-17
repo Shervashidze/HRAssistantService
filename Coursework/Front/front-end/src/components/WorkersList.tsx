@@ -13,6 +13,7 @@ export interface IWorker {
     factory: string,
     dateOfBirth: string,
     competenceIdsList: [],
+    email: string,
     [key: string]: any;
 }
 
@@ -72,6 +73,12 @@ export default class WorkersList extends React.Component<any, IState>
             width: 75
           },
           {
+            label: 'Эл. Почта',
+            field: 'email',
+            sort: 'asc',
+            width: 50
+          },
+          {
             label: 'Производство',
             field: 'factory',
             sort: 'asc',
@@ -115,6 +122,7 @@ export default class WorkersList extends React.Component<any, IState>
           <h5 className='card-title'>{this.state.worker.name}</h5>
           <p className='card-text'>
           <ul className=''>
+          <li className=''>Email: {this.state.worker.email}</li>
           <li className=''>Должность: {this.state.worker.post}</li>
           <li className=''>Телефон: {this.state.worker.phoneNumber}</li>
           <li className=''>Дата рождения: {this.state.worker.dateOfBirth}</li>

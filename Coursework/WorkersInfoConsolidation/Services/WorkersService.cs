@@ -21,6 +21,14 @@ namespace WorkersInfoConsolidation.Services
             return await dbContext.Set<Worker>().FindAsync(id);
         }
 
+        public async Task<Worker> GetWorkerByEmailAsync(string email)
+        {
+            var worker = await dbContext.Set<Worker>()
+                .FirstOrDefaultAsync(worker => worker.Email == email);
+            
+            return worker;
+        }
+
         public async Task<int> AddWorkerAsync(Worker worker)
         {
             await dbContext.AddAsync(worker);
