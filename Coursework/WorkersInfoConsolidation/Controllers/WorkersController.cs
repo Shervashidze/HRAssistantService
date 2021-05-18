@@ -40,6 +40,15 @@ namespace WorkersInfoConsolidation.Controllers
             return Ok(id);
         }
 
+        [HttpPost("Edit/{id}")]
+        public async Task<IActionResult> AddWorker(int id, [FromBody] CreateWorkerView workerView)
+        {
+            workersService.DeleteWorker(id);
+            var worker = workersMapper.Map<Worker>(workerView);
+            var new_id = await workersService.AddWorkerAsync(worker);
+            return Ok(new_id);
+        }
+
         [HttpGet("Worker/{id}")]
         public async Task<IActionResult> GetWorker(int id)
         {
