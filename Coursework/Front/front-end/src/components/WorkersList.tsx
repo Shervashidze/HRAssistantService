@@ -111,6 +111,7 @@ export default class WorkersList extends React.Component<any, IState>
             small
             data={data}
           />
+          <a className="btn btn-primary" href="/addWorker" role="button">Добавить работника</a>
           <a className="btn btn-primary" href="https://localhost:5001/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
           </div>
           <div id='worker-card' className='card'>

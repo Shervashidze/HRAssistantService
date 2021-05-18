@@ -94,51 +94,51 @@ export default class AddWorker extends React.Component<any, IFormState> {
         <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="name" name="name" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
+            <input type="text" id="name" name="name" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="phoneNumber" name="phoneNumber" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Телефон"/>
+            <input type="text" id="phoneNumber" name="phoneNumber" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Телефон"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="department" name="department" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Подразделение"/>
+            <input type="text" id="department" name="department" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Подразделение"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="email" name="email" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Эл. Почта"/>
+            <input type="text" id="email" name="email" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Эл. Почта"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="post" name="post" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Должность"/>
+            <input type="text" id="post" name="post" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Должность"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="staffCategory" name="staffCategory" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Категория персонала"/>
+            <input type="text" id="staffCategory" name="staffCategory" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Категория персонала"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="staffType" name="staffType" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Тип персонала"/>
+            <input type="text" id="staffType" name="staffType" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Тип персонала"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="factory" name="factory" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Производство"/>
+            <input type="text" id="factory" name="factory" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Производство"/>
           </label>
           </div>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control form-text-input" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения"/>
+            <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения (гггг-мм-дд)"/>
           </label>
           </div>
           
-          <input type="submit" className="btn btn-primary" value="Добавить" />
+          <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
         </form>
       </div>
       </>
