@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+#name {
+    padding:1ch;
+    font-size:200%;
+}
+
+#list{
+    float: left;
+    padding-left: 5%;
+}
+
+#pic {
+    padding-left: 0%;
+    width: 15%;
+    height: 10%;
+
+    float: left;
+    border-style: solid;
+    border-color:aliceblue;
+
+}
+#parent{
+    padding: 1%;
+}
+#WP {
+    padding-left: 2%;
+    
+}

@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>431be298-4592-41d5-9a08-f8cc694fc68d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="FeedbackFolder\" />
+    <Folder Include="FeedbackFolder" />
   </ItemGroup>
 
   <ItemGroup>

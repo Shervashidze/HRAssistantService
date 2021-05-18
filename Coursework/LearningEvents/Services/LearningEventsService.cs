@@ -17,7 +17,7 @@ namespace LearningEvents.Services
 
         public async Task<LearningEvent> GetEvent(long id)
         {
-            return await Context.Set<LearningEvent>().FindAsync(id);
+            return await Context.Set<LearningEvent>().Include(c => c.Workers).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<long> AddLearningEventAsync(LearningEvent learningEvent)
@@ -50,7 +50,12 @@ namespace LearningEvents.Services
 
         public async Task<LearningEvent[]> GetAllEvents()
         {
-            return await Context.Set<LearningEvent>().ToArrayAsync();
+            return await Context.Set<LearningEvent>().Include(c => c.Workers).ToArrayAsync();
+        }
+
+        public async Task<LearningEvent[]> GetAllEventsById(long id)
+        {
+            return await Context.Set<LearningEvent>().Include(c => c.Workers.Where(cm => cm.WorkerId == id)).Where(c => c.Workers.Where(cm => cm.WorkerId == id).Count() > 0).ToArrayAsync();
         }
     }
 }

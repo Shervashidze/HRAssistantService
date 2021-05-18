@@ -37,6 +37,7 @@ namespace LearningEvents.Controllers
                 : Ok(eve) as IActionResult;
         }
 
+
         [HttpGet]
         public async Task<EventRow[]> GetAll()
         {
@@ -59,11 +60,34 @@ namespace LearningEvents.Controllers
                 }
                 else
                 {
-                    rows[i].Capacity = (double)completed / events[i].Workers.Count + " %";
+                    rows[i].Capacity = (double)completed / events[i].Workers.Count * 100 + " %";
                 }
             }
 
             return rows;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllById(int id)
+        {
+            var events = await _learningService.GetAllEventsById(id);
+            WorkerEventsView[] ans = new WorkerEventsView[events.Length];
+            for (int i = 0; i < events.Length; i++)
+            {
+                ans[i] = new WorkerEventsView
+                {
+                    Id = events[i].Id,
+                    Name = events[i].Name,
+                    Description = events[i].Description,
+                    InitialScore = events[i].Workers[0].InitialScore,
+                    AfterwardsScore = events[i].Workers[0].AfterwardsScore,
+                    Feedback = events[i].Workers[0].Feedback
+                };
+            }
+
+            return events == null
+                ? NotFound()
+                : Ok(ans) as IActionResult;
         }
 
         [HttpPost]

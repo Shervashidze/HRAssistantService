@@ -13,5 +13,6 @@ namespace LearningEvents.Services
         Task<long> AddLearningEventAsync(LearningEvent learningEvent);
         Task<bool> Update(long id, LearningEvent learningEvent);
         Task<bool> DeleteEvent(long id);
+        Task<LearningEvent[]> GetAllEventsById(long id);
     }
 }
