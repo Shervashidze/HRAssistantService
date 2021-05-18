@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import WorkersPage from './WorkersPage';
-import LearningPage from "./LearningPage"
-import DashboardsPage from "./DashboardsPage"
-import AddWorkerPage from './AddWorkerPage';
-import AccountPage from './AccountPage';
-import AddLearningEventPage from './AddLearningEventPage';
+import WorkersPage from './pages/WorkersPage';
+import LearningPage from "./pages/LearningPage";
+import DashboardsPage from "./pages/DashboardsPage";
+import AddWorkerPage from './pages/AddWorkerPage';
+import AccountPage from './pages/AccountPage';
+import AddLearningEventPage from './pages/AddLearningEventPage';
 
 function App() {
   return (

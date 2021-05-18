@@ -1,10 +1,10 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import './styles/AddWorker.css';
+import '../styles/AddWorker.css';
 
-import TopBar from './components/TopBar';
-import NavBar from './components/NavBar';
+import TopBar from '../components/TopBar';
+import NavBar from '../components/NavBar';
 
 export interface IAddWorkerView {
   name: string,
