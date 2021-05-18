@@ -1,6 +1,8 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import './styles/AddWorker.css';
+
 import TopBar from './components/TopBar';
 import NavBar from './components/NavBar';
 
@@ -88,64 +90,57 @@ export default class AddWorker extends React.Component<any, IFormState> {
                         Сотрудник добавлен.
                       </div>
         )}
-      <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
-        <div>
-        <label htmlFor="name">
-          Имя:
-          <input type="text" id="name" name="name" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="phoneNumber">
-          Телефон:
-          <input type="text" id="phoneNumber" name="phoneNumber" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="department">
-          Подразделение:
-          <input type="text" id="department" name="department" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="email">
-          Эл. Почта:
-          <input type="text" id="email" name="email" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="post">
-          Должность:
-          <input type="text" id="post" name="post" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="staffCategory">
-          Категория персонала:
-          <input type="text" id="staffCategory" name="staffCategory" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="staffType">
-          Тип персонала:
-          <input type="text" id="staffType" name="staffType" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="factory">
-          Производство:
-          <input type="text" id="factory" name="factory" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        <div>
-        <label htmlFor="dateOfBirth">
-          Дата Рождения:
-          <input type="text" id="dateOfBirth" name="dateOfBirth" onChange={(e) => this.handleInputChanges(e)} />
-        </label>
-        </div>
-        
-        <input type="submit" value="Добавить" />
-      </form>
+      <div className="addWorkerForm">
+        <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="name" name="name" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="phoneNumber" name="phoneNumber" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Телефон"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="department" name="department" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Подразделение"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="email" name="email" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Эл. Почта"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="post" name="post" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Должность"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="staffCategory" name="staffCategory" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Категория персонала"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="staffType" name="staffType" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Тип персонала"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="factory" name="factory" className="form-control " onChange={(e) => this.handleInputChanges(e)} placeholder="Производство"/>
+          </label>
+          </div>
+          <div className="form-group">
+          <label htmlFor="formLabel">
+            <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control form-text-input" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения"/>
+          </label>
+          </div>
+          
+          <input type="submit" className="btn btn-primary" value="Добавить" />
+        </form>
+      </div>
       </>
     );
   }
