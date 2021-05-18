@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WorkersPage from './WorkersPage';
 import LearningPage from "./LearningPage"
 import DashboardsPage from "./DashboardsPage"
-import AddWorker from './AddWorker';
+import AddWorkerPage from './AddWorkerPage';
 import AccountPage from './AccountPage';
+import AddLearningEventPage from './AddLearningEventPage';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route exact path="/learning" component={LearningPage} />
         <Route exact path="/dashboards" component={DashboardsPage} />
         <Route exact path="/account" component={AccountPage} />
-        <Route exact path="/addWorker" component={AddWorker} />
+        <Route exact path="/addWorker" component={AddWorkerPage} />
+        <Route exact path="/addLearningEvent" component={AddLearningEventPage} />
       </Router>
     </React.Fragment>
   );

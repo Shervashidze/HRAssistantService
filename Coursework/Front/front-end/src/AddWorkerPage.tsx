@@ -26,7 +26,7 @@ export interface IFormState {
   loading: boolean;
 }
 
-export default class AddWorker extends React.Component<any, IFormState> {
+export default class AddWorkerPage extends React.Component<any, IFormState> {
   constructor(props: any) {
     super(props);
     this.state = {
