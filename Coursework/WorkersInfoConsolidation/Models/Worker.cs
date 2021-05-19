@@ -10,7 +10,7 @@ namespace WorkersInfoConsolidation.Models
         public int Id { get; set; }
         public string Name { get; set; } // ФИО
         public string PhoneNumber { get; set; }
-
+        public string Email { get; set; } 
         public string Department { get; set; } // Подразделения
         public string Post { get; set; } // Должности
         public string StaffCategory { get; set; } // Категории персонала

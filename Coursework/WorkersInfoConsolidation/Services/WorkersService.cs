@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WorkersInfoConsolidation.Models;
 using WorkersInfoConsolidation.Models.ViewModels;
 
+
 namespace WorkersInfoConsolidation.Services
 {
     public class WorkersService : IWorkersService
@@ -18,6 +19,14 @@ namespace WorkersInfoConsolidation.Services
         public async Task<Worker> GetWorkerAsync(int id)
         {
             return await dbContext.Set<Worker>().FindAsync(id);
+        }
+
+        public async Task<Worker> GetWorkerByEmailAsync(string email)
+        {
+            var worker = await dbContext.Set<Worker>()
+                .FirstOrDefaultAsync(worker => worker.Email == email);
+            
+            return worker;
         }
 
         public async Task<int> AddWorkerAsync(Worker worker)
@@ -44,7 +53,6 @@ namespace WorkersInfoConsolidation.Services
 
         public async Task<Worker[]> GetAllWorkers()
         {
-            //return await dbContext.Workers.ToArrayAsync();
             return await dbContext.Set<Worker>().ToArrayAsync();
         }
     }
