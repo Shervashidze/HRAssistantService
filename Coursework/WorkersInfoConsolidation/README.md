@@ -32,6 +32,22 @@ Returns json data about a single worker.
  
    `id=[integer]` worker's id
 
+**Get information about single worker by his email**
+----
+Returns json data about a single worker.
+
+* **URL**
+	/WorkerByEmail/:email	
+
+* **Method:**
+ 
+  `GET` 
+*  **URL Params** 
+
+   **Required:**
+ 
+   `email=[string]` worker's email
+
 **Delete worker**
 ----
 Deletes information about worker.
@@ -60,3 +76,14 @@ Adds information about worker.
   `POST` 
 * **Data Params**
 	Put information about worker in body of the request.
+
+**Get all workers information in excel file**
+----
+Returns excel excel data of all workers.
+
+* **URL**
+	/Excel	
+
+* **Method:**
+ 
+  `GET`

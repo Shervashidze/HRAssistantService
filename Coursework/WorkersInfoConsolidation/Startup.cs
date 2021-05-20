@@ -57,7 +57,8 @@ namespace WorkersInfoConsolidation
             app.UseCors(builder =>builder
                 .WithOrigins("http://localhost:3000") // I allow it to call api from server where react runs
                 .AllowAnyMethod()
-                .AllowCredentials());
+                .AllowCredentials()
+                .AllowAnyHeader());
             
             app.UseRouting();
 

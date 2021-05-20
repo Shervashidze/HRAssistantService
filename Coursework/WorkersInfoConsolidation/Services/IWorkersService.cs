@@ -11,6 +11,7 @@ namespace WorkersInfoConsolidation.Services
     public interface IWorkersService
     {
         Task<Worker> GetWorkerAsync(int id);
+        Task<Worker> GetWorkerByEmailAsync(string email);
         Task<int> AddWorkerAsync(Worker worker);
         int DeleteWorker(int id);
         Task<Worker[]> GetAllWorkers();
