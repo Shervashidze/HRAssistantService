@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: 'Open Sans', sans-serif!important;
+}
+
+.body-custom {
+  padding: 2%;
+}
+
+.card-img-top {
+    width: 45%;
+    height: 200px;
+    align-self: center;
+    object-fit: cover;
+}
+
+#worker-card {
+  position: fixed; right: 3%;
+  position: fixed; top: 10%;
+  margin-top: 80px;
+  width: 30%;
+  height: 573px;
+}
+
+.rowC {
+  display:flex;
+  flex-direction:row;
+  flex-shrink: 3;
+}
+
+
+.dropdown {
+  align-self: flex-end;
+}
+
+
+#loginId {
+  width: 20%;
+  height: 20%;
+}
+
+#Login {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  height: 573px;
+}
+
+#LoginTable {
+  border:none;
+  width: 100%;
+}
+
+#logintext {
+  width: 100%;
+  height: 55px;
+  background-color:white;
+  border:none;
+  resize: none;
+  word-break: break-word;
+}
+
+#loginIm {
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height: 21%;
+}

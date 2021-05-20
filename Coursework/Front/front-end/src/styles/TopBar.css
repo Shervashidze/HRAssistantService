@@ -1,0 +1,10 @@
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+.fixed-top-2 {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}
