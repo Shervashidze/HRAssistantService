@@ -41,7 +41,7 @@ namespace WorkersInfoConsolidation.Controllers
         }
 
         [HttpPost("Edit/{id}")]
-        public async Task<IActionResult> AddWorker(int id, [FromBody] CreateWorkerView workerView)
+        public async Task<IActionResult> EditWorker(int id, [FromBody] EditWorkerView workerView)
         {
             workersService.DeleteWorker(id);
             var worker = workersMapper.Map<Worker>(workerView);

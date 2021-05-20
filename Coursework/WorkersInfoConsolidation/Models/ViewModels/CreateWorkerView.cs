@@ -14,7 +14,7 @@ namespace WorkersInfoConsolidation.Models.ViewModels
         [StringLength(20)]
         public string PhoneNumber { get; set; }
 
-        [RegularExpression("@.*?\\.", ErrorMessage = "Введите email правильно.")]
+        //[RegularExpression("@.*?\\.", ErrorMessage = "Введите email правильно.")]
         public string Email { get; set; }
         public string Department { get; set; } // Подразделения
         public string Post { get; set; } // Должности
