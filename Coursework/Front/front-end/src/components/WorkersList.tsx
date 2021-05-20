@@ -1,6 +1,7 @@
 import * as React from "react";
 import { MDBDataTable } from 'mdbreact';
 import emptyAvatar from '../imgs/avatar.png'
+import { useState, useEffect, useCallback } from 'react'
 
 export interface IWorker {
     id: number,
@@ -38,14 +39,22 @@ export default class WorkersList extends React.Component<any, IState>
         })
       const result = await fetch('https://localhost:5001/api/Workers/All');
       const workers = await result.json();
-      const resultWorker = await fetch('https://localhost:5001/api/Workers/Worker/3');
+      const resultWorker = await fetch('https://localhost:5001/api/Workers/Worker/1');
       const worker = await resultWorker.json();
-        this.setState(
-          {
-          workers:workers,
-          worker:worker,
-          loading: false
-          });
+      
+      workers.forEach((e: any) => 
+        e["actionChange"]=<a className="btn btn-light" href="/editWorker" role="button">Изменить</a>)
+      workers.forEach((e: any) => 
+        e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
+          () => fetch('https://localhost:5001/api/Workers/Delete/' + e.id, {method: 'DELETE'})
+        }>Удалить</a>)
+        
+      this.setState(
+        {
+        workers:workers,
+        worker:worker,
+        loading: false
+        });
     }
 
     public async handleTableClick(path:string) {
@@ -95,6 +104,14 @@ export default class WorkersList extends React.Component<any, IState>
             field: 'post',
             sort: 'asc',
             width: 50
+          },
+          {
+            label: '',
+            field: 'actionChange'
+          },
+          {
+            label: '',
+            field: 'actionDelete'
           }
         ],
         rows:
@@ -106,13 +123,16 @@ export default class WorkersList extends React.Component<any, IState>
           <div className='body-custom'>
           <MDBDataTable
           autoWidth
-            striped
             bordered
             small
+            hover
             data={data}
           />
-          <a className="btn btn-primary" href="/addWorker" role="button">Добавить работника</a>
-          <a className="btn btn-primary" href="https://localhost:5001/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
+          <div>
+            <a className="btn btn-primary" href="/addWorker" role="button">Добавить работника</a>
+            .
+            <a className="btn btn-primary" href="https://localhost:5001/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
+          </div>
           </div>
           <div id='worker-card' className='card'>
         <div className="card-header">

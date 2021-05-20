@@ -7,6 +7,7 @@ import TopBar from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
 export interface IAddLearningEventView {
+    id: number
     name: string,
     capacity: string,
     description: string,
@@ -25,6 +26,7 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
   constructor(props: any) {
     super(props);
     this.state = {
+        id: window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
         name: '',
         capacity: '',
         description: '',
@@ -39,13 +41,14 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
     e.preventDefault();
     this.setState({ loading: true });
     const formData = {
+      id: this.state.id,
       name: this.state.name,
       capacity: this.state.capacity,
       description: this.state.description,
       plannedDate: this.state.plannedDate,
     }
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
-    axios.post(`https://localhost:8001/Learning/CreateLearningEvent`, formData).then(data => [
+    axios.post(`https://localhost:8001/Learning/CreateLearningEvent` + this.state.id, formData).then(data => [
         setTimeout(() => {
             this.props.history.push('/learning');
         }, 1500)
@@ -67,12 +70,12 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
       <NavBar />
       {!submitSuccess && (
                       <div className="alert alert-info" role="alert">
-                        Введите данные обучения.
+                        Измените данные события.
                       </div>
                     )}
       {submitSuccess && (
                       <div className="alert alert-info" role="alert">
-                        Обучение добавлено.
+                        Обучение изменено.
                       </div>
         )}
       <div className="addWorkerForm">

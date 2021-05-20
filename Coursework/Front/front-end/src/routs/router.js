@@ -18,10 +18,12 @@ import LoginPage from '../pages/LoginPage';
 import AccountPage from '../pages/AccountPage'
 
 import { createBrowserHistory } from 'history';
-import  {CreateWorkerRouter}  from './worker/WorkerRouter'
+import {CreateWorkerRouter}  from './worker/WorkerRouter'
 import {CreateInfoPage} from './worker/WorkerPersonalPage'
 import AddWorkerPage from '../pages/AddWorkerPage'
+import EditWorkerPage from '../pages/EditWorkerPage'
 import AddLearningEventPage from '../pages/AddLearningEventPage'
+import EditLearningEventPage from '../pages/EditLearningEventPage'
 import blankPage from '../pages/blankPage'
 
 const history = createBrowserHistory({});
@@ -61,7 +63,9 @@ const authentication = (logstatus) => {
                 <Route exact path="/account" component={AccountPage} />
                 <Route exact path="/addWorker" component={AddWorkerPage} />
                 <Route exact path="/addLearningEvent" component={AddLearningEventPage} />
+                <Route exact path="/editLearningEvent/:id" component={EditLearningEventPage} />
                 <Route exact path="/learning/:id" component={blankPage}/>
+                <Route exact path="/editWorker/:id" component={EditWorkerPage}/>
             </Switch>)
         case "Worker":
             return(<CreateWorkerRouter/>)
