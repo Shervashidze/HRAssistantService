@@ -29,11 +29,13 @@ export interface IFormState {
 }
 
 export default class AddWorkerPage extends React.Component<any, IFormState> {
-    constructor(props: any) {
-    super(props);
+    async init(props: any) {
+    // super(props);
+    const workerRequest = await fetch('https://localhost:5001/api/Workers/Excel');
+    const worker = await workerRequest.json();
     this.state = {
       id: window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
-      name: '',
+      name: worker.name,
       phoneNumber: '',
       department: '',
       post: '',

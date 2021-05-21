@@ -6,8 +6,6 @@ import '../styles/AddWorker.css';
 import TopBar from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
-import ListGroup from 'reactstrap/lib/ListGroup';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 export interface IAddLearningEventView {
     name: string,
@@ -104,7 +102,7 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
           <div>
                 <form  className="uploader" encType="multipart/form-data" >
                     <input  type="file" name="file" className="upload-file "  />
-                    <input  type="submit" value="Добавть файл" className="" />
+                    <input  type="submit" value="Добавить файл" className="" />
                 </form>
           </div>
 

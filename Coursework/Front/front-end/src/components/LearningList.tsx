@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MDBDataTable } from 'mdbreact';
+import { downloadTable } from "../services/file-service";
 
 export interface IState {
     loading: boolean;
@@ -29,6 +30,12 @@ export default class LearningList extends React.Component<any, IState> {
           })
         const result = await fetch('https://localhost:8001/Learning/GetAll');
         const events = await result.json();
+        events.forEach((e: any) => 
+          e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://localhost:3000/editLearningEvent/" + e.id} role="button">Изменить</a>)
+        events.forEach((e: any) => 
+          e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
+          () => fetch('https://localhost:5001/Learning/DeleteEvent/' + e.id, {method: 'DELETE'})
+        }>Удалить</a>)
         this.setState(
           {
             events: events,
@@ -65,6 +72,14 @@ export default class LearningList extends React.Component<any, IState> {
             field: 'plannedDate',
             sort: 'asc',
             width: 100
+          },
+          {
+            label: '',
+            field: 'actionChange'
+          },
+          {
+            label: '',
+            field: 'actionDelete'
           }
         ],
         rows: this.state.events
@@ -74,10 +89,18 @@ export default class LearningList extends React.Component<any, IState> {
           <>
           <div className='body-custom'>
           <MDBDataTable
+          id="LearningEventsTable"
           striped
           bordered
           data = {data}
           />
+          <div>
+            <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить обучающее событие</a>
+            .
+            <a className="btn btn-primary" onClick={
+              () => downloadTable('LearningEventsTable','1','Обучение.xls')
+            } role="button">Загрузить в виде Excel</a>
+          </div>
           </div>
         </>);
     }
