@@ -6,6 +6,9 @@ import '../styles/AddWorker.css';
 import TopBar from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
+import ListGroup from 'reactstrap/lib/ListGroup';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+
 export interface IAddLearningEventView {
     name: string,
     capacity: string,
@@ -97,7 +100,14 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
             <input type="text" id="plannedDate" name="plannedDate" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Планируемая дата"/>
           </label>
           </div>
-          
+
+          <div>
+                <form  className="uploader" encType="multipart/form-data" >
+                    <input  type="file" name="file" className="upload-file "  />
+                    <input  type="submit" value="Добавть файл" className="" />
+                </form>
+          </div>
+
           <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
         </form>
       </div>

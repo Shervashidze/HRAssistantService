@@ -48,12 +48,12 @@ export function LEList () {
 
 
   const fetchdata = useCallback(async () => {
-    let result = await fetch('https://localhost:5001/api/Workers/Worker/' + log.username);
+    let result = await fetch('https://localhost:5001/api/Workers/WorkerByEmail/' + log.username);
     let worker = await result.json();
     console.log(worker)
     let result1 = await fetch('https://localhost:8001/Learning/GetAllById/' + worker.id)
     let events1 = await result1.json();
-    events1.forEach(e => e["action"]=<button onClick={<div></div>}>Заполнить форму</button>)
+    events1.forEach(e => e["action"]=<button className="btn btn-light"  onClick={<div></div>}>Заполнить форму</button>)
     setEvents(events1)
 }, [])
 

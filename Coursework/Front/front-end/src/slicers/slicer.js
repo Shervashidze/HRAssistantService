@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 export const loginstatusSlice = createSlice({
     name: 'loginstatus',
     initialState: {
-        logstatus: 'unlog',
+        logstatus: 'Worker',
         token: '',
-        username: ''
+        username: '7@mail.com'
     },
     reducers: {
         login: (state, action) => {

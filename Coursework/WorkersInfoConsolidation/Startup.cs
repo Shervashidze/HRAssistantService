@@ -23,7 +23,7 @@ namespace WorkersInfoConsolidation
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<WorkersDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<WorkersDbContext>(options => options.UseSqlServer(connectionString));
             
             services.AddScoped<IWorkersService, WorkersService>();
             
