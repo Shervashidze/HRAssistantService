@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+    workersinfoconsolidation:
+        container_name: workersinfoconsolidation
+        build:
+            context: .
+            dockerfile: Dockerfile.wic
+        ports:
+            - '5001:80'
+    learningevents:
+        container_name: learningevents
+        build:
+            context: .
+            dockerfile: Dockerfile.learning
+        ports:
+            - '8001:80'
+    idservice:
+        container_name: idservice
+        build:
+            context: .
+            dockerfile: Dockerfile.id
+        ports:
+            - '4001:80'
+
+    frontend-prod:
+        container_name: frontend-prod
+        build:
+            context: .
+            dockerfile: Dockerfile.prod
+        ports:
+            - '3000:80'
