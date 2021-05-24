@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { Redirect } from 'react'
 
-const API_URL = "https://hrassistantservice/api/account/";
+const API_URL = "https://hrassistantservice.herokuapp.com/api/account/";
 
 export default class AuthService {
   async login(em, pas) {
@@ -14,7 +14,7 @@ export default class AuthService {
         email: em, 
         password: pas
       });
-      var result = await fetch('https://hrassistantservice/api/account/login', {
+      var result = await fetch('https://hrassistantservice.herokuapp.com/api/account/login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: b

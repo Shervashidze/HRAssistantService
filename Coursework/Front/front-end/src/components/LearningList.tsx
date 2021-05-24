@@ -27,7 +27,7 @@ export default class LearningList extends React.Component<any, IState> {
           {
             loading:true
           })
-        const result = await fetch('https://hrassistantservice/Learning/GetAll');
+        const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetAll');
         const events = await result.json();
         this.setState(
           {
@@ -39,7 +39,7 @@ export default class LearningList extends React.Component<any, IState> {
 
     public render() {
       this.state.events.forEach(element => 
-        element.clickEvent = () => window.location.href = "http://hrassistantservice/learning/" + element.id)
+        element.clickEvent = () => window.location.href = "http://hrassistantservice.herokuapp.com/learning/" + element.id)
       const data = {
         columns: [
           {

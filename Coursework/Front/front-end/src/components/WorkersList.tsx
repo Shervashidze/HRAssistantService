@@ -37,16 +37,16 @@ export default class WorkersList extends React.Component<any, IState>
         {
           loading:true
         })
-      const result = await fetch('https://hrassistantservice/api/Workers/All');
+      const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
       const workers = await result.json();
-      const resultWorker = await fetch('https://hrassistantservice/api/Workers/Worker/1');
+      const resultWorker = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/Worker/1');
       const worker = await resultWorker.json();
       
       workers.forEach((e: any) => 
         e["actionChange"]=<a className="btn btn-light" href="/editWorker" role="button">Изменить</a>)
       workers.forEach((e: any) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
-          () => fetch('https://hrassistantservice/api/Workers/Delete/' + e.id, {method: 'DELETE'})
+          () => fetch('https://hrassistantservice.herokuapp.com/api/Workers/Delete/' + e.id, {method: 'DELETE'})
         }>Удалить</a>)
         
       this.setState(
@@ -70,7 +70,7 @@ export default class WorkersList extends React.Component<any, IState>
     public render() {
       this.state.workers.forEach(element => 
         element.clickEvent = () => {
-          const path = "https://hrassistantservice/api/Workers/Worker/" + element.id;
+          const path = "https://hrassistantservice.herokuapp.com/api/Workers/Worker/" + element.id;
           this.handleTableClick(path);
         })
       const data = {
@@ -131,7 +131,7 @@ export default class WorkersList extends React.Component<any, IState>
           <div>
             <a className="btn btn-primary" href="/addWorker" role="button">Добавить работника</a>
             .
-            <a className="btn btn-primary" href="https://hrassistantservice/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
+            <a className="btn btn-primary" href="https://hrassistantservice.herokuapp.com/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
           </div>
           </div>
           <div id='worker-card' className='card'>

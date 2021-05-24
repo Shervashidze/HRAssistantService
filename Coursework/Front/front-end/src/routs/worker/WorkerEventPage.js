@@ -11,7 +11,7 @@ export function CreateWorkerEvent (id) {
     const params = useParams()
 
     const fetchdata = useCallback(async () => {
-        let result = await fetch('https://hrassistantservice/Learning/GetLearningEvent/' + params.id );
+        let result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + params.id );
         let event = await result.json();
         setEvent(event)
     }, [])

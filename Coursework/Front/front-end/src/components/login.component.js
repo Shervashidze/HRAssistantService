@@ -22,7 +22,7 @@ async function login(em, pas) {
     email: em, 
     password: pas
   });
-  var result = await fetch('https://hrassistantservice/api/account/login', {
+  var result = await fetch('https://hrassistantservice.herokuapp.com/api/account/login', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: b

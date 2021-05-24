@@ -60,7 +60,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
       email: this.state.email
     }
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
-    axios.post(`https://hrassistantservice/api/Workers/Add`, formData).then(data => [
+    axios.post(`https://hrassistantservice.herokuapp.com/api/Workers/Add`, formData).then(data => [
         setTimeout(() => {
             this.props.history.push('/workers');
         }, 1500)

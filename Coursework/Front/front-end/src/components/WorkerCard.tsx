@@ -41,7 +41,7 @@ export default class WorkerCard extends React.Component<any, IState>
       {
         loading:true
       })
-    const result = await fetch('https://hrassistantservice/api/Worker/1');
+    const result = await fetch('https://hrassistantservice.herokuapp.com/api/Worker/1');
     const worker = await result.json();
       this.setState(
         {

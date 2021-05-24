@@ -53,7 +53,7 @@ export default class blankPage extends React.Component<any, IState> {
     
     async componentDidMount() {
         const a = this.props.match.params.id;
-        const result = await fetch('https://hrassistantservice/Learning/GetLearningEvent/' + a);
+        const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + a);
         const event = await result.json();
         console.log(event.workers)
         this.setState(
@@ -146,7 +146,7 @@ class WorkersList {
 
     async componentDidMount() {
         for (let i of this.event.workers) {
-            const result = await fetch("https://hrassistantservice/api/Workers/Worker/" + i.workerId);
+            const result = await fetch("https://hrassistantservice.herokuapp.com/api/Workers/Worker/" + i.workerId);
             const worker = await result.json();
             this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore));
         }
@@ -154,7 +154,7 @@ class WorkersList {
 
     async getWorkers() {
         for (let i of this.event.workers) {
-            const result = await fetch("https://hrassistantservice/api/Workers/Worker/" + i.workerId);
+            const result = await fetch("https://hrassistantservice.herokuapp.com/api/Workers/Worker/" + i.workerId);
             const worker = await result.json();
             this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore));
         }
