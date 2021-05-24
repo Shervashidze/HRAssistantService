@@ -19,9 +19,8 @@ namespace WorkersInfoConsolidation.Models
         
         public string Factory { get; set; } // Производство
         
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
+       
+        public string DateOfBirth { get; set; }
 
     }
 }

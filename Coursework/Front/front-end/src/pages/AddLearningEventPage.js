@@ -215,7 +215,7 @@ async function sendEvent() {
     headers: {'Content-Type': 'application/json'},
     body: b
   })
-  history.push('/leraning')  
+  history.push('/learning')  
 }
 
 const fetchdata = useCallback(async () => {

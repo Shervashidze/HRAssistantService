@@ -1,7 +1,8 @@
 import * as React from "react";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTableV5 } from 'mdbreact';
 import emptyAvatar from '../imgs/avatar.png'
 import { useState, useEffect, useCallback } from 'react'
+import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
 
 export interface IWorker {
     id: number,
@@ -107,10 +108,12 @@ export default class WorkersList extends React.Component<any, IState>
           },
           {
             label: '',
+            sort: 'disabled',
             field: 'actionChange'
           },
           {
             label: '',
+            sort: 'disabled',
             field: 'actionDelete'
           }
         ],
@@ -122,17 +125,19 @@ export default class WorkersList extends React.Component<any, IState>
           
           <>
           <div className='body-custom'>
-          <MDBDataTable
-
-            bordered
-            small
-            hover
+          <MDBDataTableV5
+            id="WorkersInfoT"
+            autoWidth
+            striped
+            bordered={false}
+            btn
+            searchTop
+            searchBottom={false}
             data={data}
           />
           <div>
             <a className="btn btn-primary" href="/addWorker" role="button">Добавить работника</a>
-            .
-            <a className="btn btn-primary" href="https://localhost:5001/api/Workers/Excel" role="button">Загрузить в виде Excel</a>
+            <a className="btn btn-primary" onClick={()=>downloadTableWithoutLast2("WorkersInfoT", "1", "Сотрудники.xls")} role="button">Загрузить в виде Excel</a>
           </div>
           </div>
           <div id='worker-card' className='card'>

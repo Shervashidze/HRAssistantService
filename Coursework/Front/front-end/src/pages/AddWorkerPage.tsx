@@ -60,11 +60,14 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
       email: this.state.email
     }
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
-    axios.post(`https://localhost:5001/api/Workers/Add`, formData).then(data => [
-        setTimeout(() => {
-            this.props.history.push('/workers');
-        }, 1500)
-    ]);
+    console.log(formData)
+    const b = formData
+    fetch('https://localhost:5001/api/Workers/Add', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(b)
+  });
+    this.props.history.push("/workers")
   }
 
   private handleInputChanges = (e: React.FormEvent<HTMLInputElement>) => {
@@ -92,7 +95,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
         <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
           <div className="form-group">
           <label htmlFor="formLabel">
-            <input type="text" id="name" name="name" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
+            <input type="text" id="nam" name="name" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
           </label>
           </div>
           <div className="form-group">

@@ -72,14 +72,24 @@ export default class blankPage extends React.Component<any, IState> {
             });
     }
 
-    createDel(id: number) {
-      return  <a className="btn btn-light" role="button" onClick={() => this.delWorker(id)}>Удалить</a>
+    createDel(id: number, row: number) {
+      return  <a className="btn btn-light" role="button" onClick={() => this.delWorker(id, row)}>Удалить</a>
     }
 
-    delWorker(id: number) {
+    async delWorker(id: number,row: number) {
       console.log(id)
-      delete this.state.workers[id]
-      console.log(this.state.workers)
+      var copy = this.state.workers
+      var ans = copy.splice(row, 1)
+      this.setState({workers: copy})
+      this.state.event.workers.filter(e => e.workerId === id)
+      console.log(id)
+      console.log(this.state.event)
+
+      var r = await fetch('https://localhost:8001/Learning/UpdateEvent/' + this.state.event.id, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(this.state.event)
+      });
     }
 
     public render() {
@@ -90,8 +100,7 @@ export default class blankPage extends React.Component<any, IState> {
         }
 
       this.state.workers.forEach
-      ((e: any, index) => e["actionDelete"]=this.createDel(index))
-      console.log(this.state.workers)
+      ((e: any, index) => e["actionDelete"]=this.createDel(e, index))
 
       const data = {
         columns: [
@@ -177,7 +186,7 @@ class WorkersList {
         for (let i of this.event.workers) {
             const result = await fetch("https://localhost:5001/api/Workers/Worker/" + i.workerId);
             const worker = await result.json();
-            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore));
+            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore, worker.id));
         }
       }
 
@@ -185,7 +194,7 @@ class WorkersList {
         for (let i of this.event.workers) {
             const result = await fetch("https://localhost:5001/api/Workers/Worker/" + i.workerId);
             const worker = await result.json();
-            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore));
+            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore, worker.id));
         }
 
         return this.workers;
@@ -198,14 +207,16 @@ class WorkerRow {
     post: string;
     initialscore: number;
     afterwardsscore: number;
+    id: number;
 
     constructor(name: string, factory: string, post: string,
         initialscore: number,
-        afterwardsscore: number){
+        afterwardsscore: number, id: number){
             this.name = name;
             this.factory = factory;
             this.post = post;
             this.initialscore = initialscore;
             this.afterwardsscore = afterwardsscore;
+            this.id = id;
     }
 }
