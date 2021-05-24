@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import '../styles/AddWorker.css';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 import { useParams } from 'react-router';
 
@@ -83,8 +83,6 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
     const { submitSuccess, loading } = this.state;
     return(
       <>
-      <TopBar />
-      <NavBar />
       {!submitSuccess && (
                       <div className="alert alert-info" role="alert">
                         Введите новые данные сотрудника.
@@ -142,7 +140,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
             <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения (гггг-мм-дд)"/>
           </label>
           </div>
-          
+
           <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
         </form>
       </div>

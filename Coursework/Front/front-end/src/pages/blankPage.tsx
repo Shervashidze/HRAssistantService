@@ -1,9 +1,11 @@
 import React from 'react';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTable, MDBDataTableV5 } from 'mdbreact';
+
+import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
 
 
 export interface IState {
@@ -55,7 +57,7 @@ export default class blankPage extends React.Component<any, IState> {
         const a = this.props.match.params.id;
         const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + a);
         const event = await result.json();
-        console.log(event.workers)
+        console.log(event)
         this.setState(
             {
               event: event,
@@ -70,13 +72,27 @@ export default class blankPage extends React.Component<any, IState> {
             });
     }
 
+    createDel(id: number) {
+      return  <a className="btn btn-light" role="button" onClick={() => this.delWorker(id)}>Удалить</a>
+    }
+
+    delWorker(id: number) {
+      console.log(id)
+      delete this.state.workers[id]
+      console.log(this.state.workers)
+    }
 
     public render() {
         if (this.state == null) {
-            return(<> <TopBar />
+            return(<> <CreateTopBar />
                 <NavBar />
                 </>);
         }
+
+      this.state.workers.forEach
+      ((e: any, index) => e["actionDelete"]=this.createDel(index))
+      console.log(this.state.workers)
+
       const data = {
         columns: [
           {
@@ -108,29 +124,42 @@ export default class blankPage extends React.Component<any, IState> {
             field: 'afterwardsscore',
             sort: 'asc',
             width: 100
+          },
+          {
+            label: '',
+            sort: 'disabled',
+            field: 'actionDelete'
           }
         ],
         rows: this.state.workers
       };
+
       return(
-        <>
-        <TopBar />
-        <NavBar />
+        <div>
+        <div id="editLP">
         <h3>Обучение: {this.state.event.name}</h3>
         <React.Fragment>
             {this.state.event.description}
             <div></div>Максимально возможная оценка: {this.state.event.maxScore}
         </React.Fragment>
         <>
-              <div className='body-custom'>
-              <MDBDataTable
+              <div className='body-custom1'>
+              <MDBDataTableV5
               striped
-              bordered
+              bordered={false}
+              btn
+              searchTop
+              searchBottom={false}
               data = {data}
               />
+              <div>
+                <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить работника</a>
+                <a className="btn btn-primary" onClick={() => downloadTableWithoutLast2('LearningEventsTable','1','Обучение.xls')} role="button">Загрузить в виде Excel</a>
+              </div>
               </div>
             </>
-        </>
+        </div>
+        </div>
       );
     }
 }

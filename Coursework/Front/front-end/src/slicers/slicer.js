@@ -5,7 +5,7 @@ export const loginstatusSlice = createSlice({
     initialState: {
         logstatus: 'Admin',
         token: '',
-        username: ''
+        username: 'admin@gmail.com'
     },
     reducers: {
         login: (state, action) => {

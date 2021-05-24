@@ -53,7 +53,7 @@ export function LEList () {
     console.log(worker)
     let result1 = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetAllById/' + worker.id)
     let events1 = await result1.json();
-    events1.forEach(e => e["action"]=<button onClick={<div></div>}>Заполнить форму</button>)
+    events1.forEach(e => e["action"]=<button className="btn btn-light"  onClick={<div></div>}>Заполнить форму</button>)
     setEvents(events1)
 }, [])
 

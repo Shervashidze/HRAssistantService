@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 import WorkerCard from '../components/WorkerCard';
 

@@ -1,5 +1,6 @@
 import * as React from "react";
-import { MDBDataTable } from 'mdbreact';
+import { MDBDataTableV5 } from 'mdbreact';
+import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
 
 export interface IState {
     loading: boolean;
@@ -36,10 +37,17 @@ export default class LearningList extends React.Component<any, IState> {
           });
       }
 
+    deleteRow(id: number) {
+      fetch('https://localhost:8001/Learning/DeleteEvent/' + id, {method: 'DELETE'})
+      window.location.href = "http://localhost:3000/learning/"
+    }
 
     public render() {
-      this.state.events.forEach(element => 
-        element.clickEvent = () => window.location.href = "http://hrassistantservice.herokuapp.com/learning/" + element.id)
+      this.state.events.forEach((e: any) => 
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://localhost:3000/editLearningEvent/" + e.id} role="button">Изменить</a>)
+      this.state.events.forEach((e: any) => 
+        e["actionDelete"]=<a className="btn btn-light" role="button" 
+        onClick={() => this.deleteRow(e.id)}>Удалить</a>)
       const data = {
         columns: [
           {
@@ -65,6 +73,16 @@ export default class LearningList extends React.Component<any, IState> {
             field: 'plannedDate',
             sort: 'asc',
             width: 100
+          },
+          {
+            label: '',
+            sort: 'disabled',
+            field: 'actionChange'
+          },
+          {
+            label: '',
+            sort: 'disabled',
+            field: 'actionDelete'
           }
         ],
         rows: this.state.events
@@ -72,12 +90,21 @@ export default class LearningList extends React.Component<any, IState> {
 
         return (
           <>
-          <div className='body-custom'>
-          <MDBDataTable
+          <div className='body-custom1'>
+          <MDBDataTableV5
+          id="LearningEventsTable"
+          autoWidth
           striped
-          bordered
+          bordered={false}
+          btn
+          searchTop
+          searchBottom={false}
           data = {data}
           />
+          <div>
+            <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить обучающее событие</a>
+            <a className="btn btn-primary" onClick={() => downloadTableWithoutLast2('LearningEventsTable','1','Обучение.xls')} role="button">Загрузить в виде Excel</a>
+          </div>
           </div>
         </>);
     }

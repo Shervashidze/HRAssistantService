@@ -11,9 +11,8 @@ namespace LearningEvents.Models
 
         public string Name { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime PlannedDate { get; set; }
+
+        public string PlannedDate { get; set; }
 
         public List<Competence> CompetencesId { get; set; } = new List<Competence>();
 

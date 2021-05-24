@@ -43,7 +43,7 @@ export default class WorkersList extends React.Component<any, IState>
       const worker = await resultWorker.json();
       
       workers.forEach((e: any) => 
-        e["actionChange"]=<a className="btn btn-light" href="/editWorker" role="button">Изменить</a>)
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://localhost:3000/editWorker/" + e.id} role="button">Изменить</a>)
       workers.forEach((e: any) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
           () => fetch('https://hrassistantservice.herokuapp.com/api/Workers/Delete/' + e.id, {method: 'DELETE'})
@@ -119,10 +119,11 @@ export default class WorkersList extends React.Component<any, IState>
       };
 
         return (
+          
           <>
           <div className='body-custom'>
           <MDBDataTable
-          autoWidth
+
             bordered
             small
             hover

@@ -32,6 +32,7 @@ namespace LearningEvents.Controllers
         public async Task<IActionResult> GetLearningEvent(int id)
         {
             var eve = await _learningService.GetEvent(id);
+
             return eve == null
                 ? NotFound()
                 : Ok(eve) as IActionResult;
