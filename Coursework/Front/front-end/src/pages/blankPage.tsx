@@ -85,7 +85,7 @@ export default class blankPage extends React.Component<any, IState> {
       console.log(id)
       console.log(this.state.event)
 
-      var r = await fetch('https://localhost:8001/Learning/UpdateEvent/' + this.state.event.id, {
+      var r = await fetch('https://hrassistantservice.herokuapp.com/Learning/UpdateEvent/' + this.state.event.id, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(this.state.event)

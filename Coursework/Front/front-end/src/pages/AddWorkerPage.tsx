@@ -62,7 +62,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
     console.log(formData)
     const b = formData
-    fetch('https://localhost:5001/api/Workers/Add', {
+    fetch('https://hrassistantservice.herokuapp.com/api/Workers/Add', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(b)

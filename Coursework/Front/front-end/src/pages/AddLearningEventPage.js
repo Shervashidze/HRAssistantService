@@ -3,8 +3,6 @@ import axios from 'axios';
 
 import '../styles/AddWorker.css';
 
-import {CreateTopBar} from '../components/TopBar';
-import NavBar from '../components/NavBar';
 import {useState, useRef, useCallback, useEffect} from 'react'
 import { MDBDataTableV5 } from 'mdbreact';
 
@@ -210,7 +208,7 @@ async function sendEvent() {
     maxScore: parseInt(score, 10),
     workers: selected
   })
-  var ans = await fetch('https://localhost:8001/Learning/CreateLearningEvent', {
+  var ans = await fetch('https://hrassistantservice.herokuapp.com/Learning/CreateLearningEvent', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: b
@@ -219,7 +217,7 @@ async function sendEvent() {
 }
 
 const fetchdata = useCallback(async () => {
-  const result = await fetch('https://localhost:5001/api/Workers/All');
+  const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
   const workers = await result.json();
   workers.forEach(element => {
     element["checked"] = true

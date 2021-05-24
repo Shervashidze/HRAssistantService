@@ -20,8 +20,8 @@ body {
 }
 
 #worker-card {
-  position: fixed; right: 2%;
-  position: fixed; top: 9%;
+  position: relative; right: 1%;
+  position: relative; top: 15%;
   margin-top: 10px;
   width: 25%;
   height: 90%;
@@ -76,10 +76,12 @@ body {
 }
 
 #editLP {
-  padding: 1%
+  padding: 1%;
+  align-self: center;
 }
 
 #createLP {
   padding: 1%;
+  align-self: center;
   margin: auto;
 }

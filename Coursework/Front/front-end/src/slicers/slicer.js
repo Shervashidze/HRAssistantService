@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const loginstatusSlice = createSlice({
     name: 'loginstatus',
     initialState: {
-        logstatus: 'Admin',
+        logstatus: 'unlog',
         token: '',
         username: 'admin@gmail.com'
     },

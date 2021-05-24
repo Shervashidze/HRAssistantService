@@ -46,7 +46,7 @@ export function CreateLearningList() {
         const [rows, setRows] = useState([])
 
         const fetchdata = useCallback(async () => {
-            const result = await fetch('https://localhost:8001/Learning/GetAll');
+            const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetAll');
             const events = await result.json();
             setRows(events)
         }, [])
@@ -56,14 +56,14 @@ export function CreateLearningList() {
         }, [fetchdata])
 
         function deleteRow(id, index) {
-            fetch('https://localhost:8001/Learning/DeleteEvent/' + id, {method: 'DELETE'})
+            fetch('https://hrassistantservice.herokuapp.com/Learning/DeleteEvent/' + id, {method: 'DELETE'})
             const copy = [...rows]
             var ans = copy.splice(index, 1)
             setRows(copy)
         }
         
         return (rows.forEach((e) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://localhost:3000/editLearningEvent/" + e.id} role="button">Изменить</a>),
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>),
         rows.forEach((e, index) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" 
         onClick={() => deleteRow(e.id, index)}>Удалить</a>),
