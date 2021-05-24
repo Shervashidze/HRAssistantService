@@ -22,9 +22,11 @@ import {CreateWorkerRouter}  from './worker/WorkerRouter'
 import {CreateInfoPage} from './worker/WorkerPersonalPage'
 import AddWorkerPage from '../pages/AddWorkerPage'
 import EditWorkerPage from '../pages/EditWorkerPage'
-import AddLearningEventPage from '../pages/AddLearningEventPage'
+import {CreateLearningEventPage} from '../pages/AddLearningEventPage'
 import EditLearningEventPage from '../pages/EditLearningEventPage'
 import blankPage from '../pages/blankPage'
+import NavBar from '../components/NavBar';
+import { CreateTopBar} from './worker/Topbar'
 
 const history = createBrowserHistory({});
 
@@ -35,7 +37,6 @@ export function CreateRouter() {
 
     
     const logstatus = log.logstatus
-    console.log(log)
 
     return (
         <React.Fragment>
@@ -56,17 +57,23 @@ const authentication = (logstatus) => {
                 </Switch>)
         case "Admin":
             return(
+            <Fragment>
+            <CreateTopBar/>
+            <NavBar/>
             <Switch>
                 <Route exact path="/workers" component={WorkersPage} />
                 <Route exact path="/learning" component={LearningPage} />
                 <Route exact path="/dashboards" component={DashboardsPage} />
                 <Route exact path="/account" component={AccountPage} />
                 <Route exact path="/addWorker" component={AddWorkerPage} />
-                <Route exact path="/addLearningEvent" component={AddLearningEventPage} />
-                <Route exact path="/editLearningEvent/:id" component={EditLearningEventPage} />
+                <Route exact path="/addLearningEvent" component={CreateLearningEventPage} />
+                <Route exact path="/editLearningEvent/:id" component={blankPage} />
                 <Route exact path="/learning/:id" component={blankPage}/>
                 <Route exact path="/editWorker/:id" component={EditWorkerPage}/>
-            </Switch>)
+                <Route exact path="/info" component={CreateInfoPage}/>
+                <Route render={() => <Redirect to="/info" />} />
+            </Switch>
+            </Fragment>)
         case "Worker":
             return(<CreateWorkerRouter/>)
 

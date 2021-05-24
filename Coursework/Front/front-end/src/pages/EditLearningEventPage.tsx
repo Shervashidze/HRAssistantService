@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import '../styles/AddWorker.css';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 
 export interface IAddLearningEventView {
@@ -66,8 +66,6 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
     const { submitSuccess, loading } = this.state;
     return(
       <>
-      <TopBar />
-      <NavBar />
       {!submitSuccess && (
                       <div className="alert alert-info" role="alert">
                         Измените данные события.

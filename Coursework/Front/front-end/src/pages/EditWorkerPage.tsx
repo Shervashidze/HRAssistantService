@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import '../styles/AddWorker.css';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 import { useParams } from 'react-router';
 
@@ -29,13 +29,11 @@ export interface IFormState {
 }
 
 export default class AddWorkerPage extends React.Component<any, IFormState> {
-    async init(props: any) {
-    // super(props);
-    const workerRequest = await fetch('https://localhost:5001/api/Workers/Excel');
-    const worker = await workerRequest.json();
+    constructor(props: any) {
+    super(props);
     this.state = {
       id: window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
-      name: worker.name,
+      name: '',
       phoneNumber: '',
       department: '',
       post: '',
@@ -85,8 +83,6 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
     const { submitSuccess, loading } = this.state;
     return(
       <>
-      <TopBar />
-      <NavBar />
       {!submitSuccess && (
                       <div className="alert alert-info" role="alert">
                         Введите новые данные сотрудника.
@@ -144,7 +140,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
             <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения (гггг-мм-дд)"/>
           </label>
           </div>
-          
+
           <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
         </form>
       </div>

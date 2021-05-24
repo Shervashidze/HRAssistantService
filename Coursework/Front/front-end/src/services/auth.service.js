@@ -24,7 +24,6 @@ export default class AuthService {
       let data = await result.text();
       let decoded = jwt_decode(data);
 
-      console.log(result)
       return result;
   }
 }

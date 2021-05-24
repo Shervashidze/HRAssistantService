@@ -14,11 +14,35 @@ function  downloadURI(uri, name) {
     link.click();
 }
 
-function downloadTable(table, name, fileName) {
-    if (!table.nodeType) table = document.getElementById(table)
-      var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+function downloadTableWithoutLast2(table, name, fileName) {
+    if (!table.nodeType) 
+        table = document.getElementById(table)
+    var copy = table.cloneNode(true)
+    var rows = copy.rows
+    var cells = rows[0].cells
+
+    var i = cells.length - 1
+    for (var j = 0; j < rows.length; j++) {
+        rows[j].deleteCell(i);
+    }
+
+    var i = cells.length - 1
+    for (var j = 0; j < rows.length; j++) {
+        rows[j].deleteCell(i);
+    }
+
+    var ctx = {worksheet: name || 'Worksheet', table: copy.innerHTML}
     var resuri = uri + base64(format(template, ctx))
     downloadURI(resuri, fileName);
 };
 
-export {downloadTable}
+function downloadTable(table, name, fileName) {
+    if (!table.nodeType) 
+        table = document.getElementById(table)
+    
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    var resuri = uri + base64(format(template, ctx))
+    downloadURI(resuri, fileName);
+};
+
+export {downloadTable, downloadTableWithoutLast2}

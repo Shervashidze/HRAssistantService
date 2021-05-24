@@ -13,8 +13,9 @@ namespace LearningEvents
         public AplProfile()
         {
             CreateMap<LearningEvent, LearningEventView>();
-            CreateMap<LearningEvent, LearningEventView>().ReverseMap();
-            CreateMap<LearningEvent, EventRow>().ForMember("PlannedDate", cm => cm.MapFrom(c => c.PlannedDate.Day.ToString() + ":" + c.PlannedDate.Month.ToString() + ":" + c.PlannedDate.Year.ToString()));
+            CreateMap<LearningEvent, LearningEventView>().ReverseMap()
+                .ForMember("Workers", cm => cm.MapFrom(g => g.Workers.Select(c => new Worker { WorkerId=c.Id, InitialScore=c.InitialScore, AfterwardsScore=c.AfterwardsScore, LearningEventId = c.LearningEventId })));
+            CreateMap<LearningEvent, EventRow>();
             CreateMap<LearningEvent, EventRow>().ReverseMap();
         }
     }

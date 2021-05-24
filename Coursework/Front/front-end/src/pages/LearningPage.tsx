@@ -1,11 +1,12 @@
 import React from 'react';
 
-import TopBar from '../components/TopBar';
+import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
 import LearningList from '../components/LearningList';
 
 import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from "react-router-dom";
 import BlankPage from './blankPage';
+import {CreateLearningList} from '../components/CreateLearningList'
 
 interface MatchParams {
   eventId: string;
@@ -19,9 +20,7 @@ export default class LearningPage extends React.Component<any, any> {
     return(
       <>
       <Route path="/products/:eventId" component={BlankPage} />
-      <TopBar />
-      <NavBar />
-      <LearningList />
+      <CreateLearningList/>
       </>
     );
   }

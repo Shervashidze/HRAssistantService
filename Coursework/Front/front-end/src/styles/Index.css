@@ -8,7 +8,10 @@ body {
   padding: 2%;
   width: 74%
 }
-
+.body-custom1 {
+  padding: 2%;
+  width: 100%
+}
 .card-img-top {
     width: 45%;
     height: 200px;
@@ -70,4 +73,13 @@ body {
   margin-right: auto;
   width: 20%;
   height: 21%;
+}
+
+#editLP {
+  padding: 1%
+}
+
+#createLP {
+  padding: 1%;
+  margin: auto;
 }

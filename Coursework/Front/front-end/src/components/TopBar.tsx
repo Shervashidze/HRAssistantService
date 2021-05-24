@@ -1,11 +1,56 @@
-import * as React from "react";
-import {Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap';
+import {Navbar, Nav, NavItem, NavDropdown, Button} from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import logoGN from '../imgs/logoGN.png'
+import { useDispatch, useSelector } from 'react-redux'
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import { Redirect } from 'react-router-dom'
+import { selectLoginstatus, unlog, login } from '../slicers/slicer'
 
-export default class TopBar extends React.Component<any, any>{
-  public render() {
-      return (
+
+
+
+export function CreateTopBar() {
+    const dispatch = useDispatch()
+    const log = useSelector(selectLoginstatus)
+    const [name, setName] = useState("")
+    const [toL, setToL] = useState(false)
+    const [toI, setToI] = useState(false)
+
+    const fetchdata = useCallback(async () => {
+      let result = await fetch('https://localhost:5001/api/Workers/WorkerByEmail/' + log.username);
+      let worker = await result.json();
+      setName(worker.name)
+  }, [])
+
+  useEffect(() => {
+      fetchdata()
+  }, [fetchdata])
+
+
+  function setT() {
+    if (toL) {
+      setToL(false)
+    }
+    if (toI) {
+      setToI(false)
+    }
+    setToL(true)
+  }
+
+  function setI() {
+    if (toL) {
+      setToL(false)
+    }
+    if (toI) {
+      setToI(false)
+    }
+    setToI(true)
+  }
+
+    return (
+      <>
+      {toL ? <Redirect to="/learning"/> : null}
+      {toI ? <Redirect to="/info"/> : null}
         <nav className="navbar navbar-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">
             <img src={logoGN}
@@ -16,16 +61,21 @@ export default class TopBar extends React.Component<any, any>{
           Сервис Обучения Персонала
           </div>
           <NavDropdown title="Аккаунт" id="nav-dropdown">
-            <NavDropdown.Header>"Мое имя"</NavDropdown.Header>
-              <NavDropdown.Item eventKey="4.1">Уведомления</NavDropdown.Item>
-              <NavDropdown.Item href="/account" eventKey="/account">Управление аккаунтом</NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.3">Календарь обучения</NavDropdown.Item>
+            <NavDropdown.Header>{name}</NavDropdown.Header>
+              <NavDropdown.Item onClick={setT}>Обучающие мероприятия</NavDropdown.Item>
+              <NavDropdown.Item onClick={setI}>Аккаунт</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/logout" eventKey="/logout">
+              <NavDropdown.Item onClick={logout}>
                   Выйти
               </NavDropdown.Item>
-          </NavDropdown>
+            </NavDropdown>
         </nav>
+        </>
     )
-  }
+
+    function logout() {
+        dispatch(login("unlog"))
+    }
 }
+
+
