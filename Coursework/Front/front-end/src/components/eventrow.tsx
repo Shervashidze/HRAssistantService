@@ -4,7 +4,7 @@ import { Component } from 'react'
 export default class eventrow extends React.Component<any, any>{
   deleteRow() {
     let id = this.props.worker.id;
-    fetch('https://localhost:8001/api/Workers/Delete/' + id, {
+    fetch('https://hrassistantservice/api/Workers/Delete/' + id, {
       method: 'DELETE'
     });
   }

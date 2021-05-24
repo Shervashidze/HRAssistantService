@@ -65,7 +65,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
     }
     console.log(this.state.id)
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
-    axios.post(`https://localhost:5001/api/Workers/Edit/` + this.state.id, formData).then(data => [
+    axios.post(`https://hrassistantservice/api/Workers/Edit/` + this.state.id, formData).then(data => [
         setTimeout(() => {
             this.props.history.push('/workers');
         }, 1500)

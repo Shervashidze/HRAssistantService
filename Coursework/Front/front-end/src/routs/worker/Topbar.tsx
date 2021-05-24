@@ -17,7 +17,7 @@ export function CreateTopBar() {
     const [toI, setToI] = useState(false)
 
     const fetchdata = useCallback(async () => {
-      let result = await fetch('https://localhost:5001/api/Workers/WorkerByEmail/' + log.username);
+      let result = await fetch('https://hrassistantservice/api/Workers/WorkerByEmail/' + log.username);
       let worker = await result.json();
       setName(worker.name)
   }, [])

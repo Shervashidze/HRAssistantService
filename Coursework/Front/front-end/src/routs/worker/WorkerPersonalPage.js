@@ -26,9 +26,9 @@ export function CreateInfoPage() {
         if (log.username === '') {
             return
         }
-        let r = await fetch('https://localhost:5001/api/Workers/WorkerByEmail/' + log.username)
+        let r = await fetch('https://hrassistantservice/api/Workers/WorkerByEmail/' + log.username)
         let a = await r.json()
-        let result = await fetch('https://localhost:5001/api/Workers/Worker/' + a.id);
+        let result = await fetch('https://hrassistantservice/api/Workers/Worker/' + a.id);
         let worker = await result.json();
         setName(worker.name)
         setPhoneNumber(worker.phoneNumber)

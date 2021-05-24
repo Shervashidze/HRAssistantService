@@ -48,7 +48,7 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
       plannedDate: this.state.plannedDate,
     }
     this.setState({ submitSuccess: true, values: [...this.state.values, formData], loading: false });
-    axios.post(`https://localhost:8001/Learning/CreateLearningEvent` + this.state.id, formData).then(data => [
+    axios.post(`https://hrassistantservice/Learning/CreateLearningEvent` + this.state.id, formData).then(data => [
         setTimeout(() => {
             this.props.history.push('/learning');
         }, 1500)

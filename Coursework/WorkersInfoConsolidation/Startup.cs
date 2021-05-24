@@ -48,7 +48,7 @@ namespace WorkersInfoConsolidation
                     var pgPass = pgUserPass.Split(":")[1];
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
-                    connStr = $"Host={pgHost};Port={pgPort};Username={pgUser};Password={pgPass};Database={pgDb}";
+                    connStr = $"Host={pgHost};Port={pgPort};Username={pgUser};Password={pgPass};Database={pgDb};SslMode=Require;TrustServerCertificate=true";
                 }
                 // Whether the connection string came from the local development configuration file
                 // or from the environment variable from Heroku, use it to set up your DbContext.
