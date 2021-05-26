@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router , Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AuthService from "./services/auth.service";
 
 import WorkersPage from './pages/WorkersPage';
 import LearningPage from "./pages/LearningPage";

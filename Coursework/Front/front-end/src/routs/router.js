@@ -37,6 +37,8 @@ export function CreateRouter() {
 
     
     const logstatus = log.logstatus
+    console.log(log)
+    console.log(localStorage.getItem("_status"))
 
     return (
         <React.Fragment>
