@@ -72,8 +72,8 @@ export default class blankPage extends React.Component<any, IState> {
             });
     }
 
-    createDel(id: number, row: number) {
-      return  <a className="btn btn-light" role="button" onClick={() => this.delWorker(id, row)}>Удалить</a>
+    createDel(e: WorkerRow, row: number) {
+      return  <a className="btn btn-light" role="button" onClick={() => this.delWorker(e.id, row)}>Удалить</a>
     }
 
     async delWorker(id: number,row: number) {
@@ -81,14 +81,14 @@ export default class blankPage extends React.Component<any, IState> {
       var copy = this.state.workers
       var ans = copy.splice(row, 1)
       this.setState({workers: copy})
-      this.state.event.workers.filter(e => e.workerId === id)
-      console.log(id)
-      console.log(this.state.event)
+      var eve = this.state.event
+      var w = eve.workers.filter(e => e.workerId !== id)
+      eve.workers = w
 
       var r = await fetch('https://localhost:8001/Learning/UpdateEvent/' + this.state.event.id, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(this.state.event)
+      body: JSON.stringify(eve)
       });
     }
 
@@ -100,7 +100,7 @@ export default class blankPage extends React.Component<any, IState> {
         }
 
       this.state.workers.forEach
-      ((e: any, index) => e["actionDelete"]=this.createDel(e, index))
+      ((e: any, index) => e["actionDelete"]=this.createDel(e as WorkerRow, index))
 
       const data = {
         columns: [
@@ -194,7 +194,7 @@ class WorkersList {
         for (let i of this.event.workers) {
             const result = await fetch("https://localhost:5001/api/Workers/Worker/" + i.workerId);
             const worker = await result.json();
-            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore, worker.id));
+            this.workers.push(new WorkerRow(worker.name, worker.factory, worker.post, i.initialScore, i.afterwardsScore, i.workerId));
         }
 
         return this.workers;
