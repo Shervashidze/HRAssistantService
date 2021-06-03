@@ -5,6 +5,7 @@ import '../styles/AddWorker.css';
 
 import {CreateTopBar} from '../components/TopBar';
 import NavBar from '../components/NavBar';
+import {Example} from '../components/addWorkerPopUp'
 
 export interface IAddLearningEventView {
     id: number
@@ -99,7 +100,7 @@ export default class AddLearningEvent extends React.Component<any, IFormState> {
           </label>
           </div>
           
-          <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
+          <input type="submit" className="btn btn-primary cbtn" value="Добавить" onClick={Example} />
         </form>
       </div>
       </>

@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 import { MDBDataTable, MDBDataTableV5 } from 'mdbreact';
 
 import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
+import {Example} from '../components/addWorkerPopUp'
 
 
 export interface IState {
@@ -162,7 +163,7 @@ export default class blankPage extends React.Component<any, IState> {
               data = {data}
               />
               <div>
-                <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить работника</a>
+                <Example/>
                 <a className="btn btn-primary" onClick={() => downloadTableWithoutLast2('LearningEventsTable','1','Обучение.xls')} role="button">Загрузить в виде Excel</a>
               </div>
               </div>
