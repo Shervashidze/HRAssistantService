@@ -63,8 +63,12 @@ export function Example() {
         const cur = await res.json();
         const curw = cur.workers
         let a = workers
+        curw.forEach(worker => {if (typeof worker.workerId !== "undefined") 
+            worker.id = worker.workerId})
+        console.log(a)
+        console.log(curw)
         for (var i = 0; i < curw.length; i++) {
-            a = a.filter(el => el.id !== curw[i].id)
+            a = a.filter(el => el.id !== curw[i].workerId)
         }
         setCurrent(curw)
         setRows(a)
@@ -80,13 +84,16 @@ export function Example() {
         var ans = copy.splice(index, 1)
         setRows(copy)
         setCurrent(element => [...element, {"id": id}])
-        console.log(current)
       }
 
       async function saveChanges() {
         const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + props.id);
         let event = await result.json();
+        console.log(event)
         event.workers = current;
+        event.workers.forEach(worker => {if (typeof worker.workerId !== "undefined") 
+            worker.id = worker.workerId})
+        console.log(event)
         var r = await fetch('https://hrassistantservice.herokuapp.com/Learning/UpdateEvent/' + props.id, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

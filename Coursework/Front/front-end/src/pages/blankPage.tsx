@@ -58,7 +58,6 @@ export default class blankPage extends React.Component<any, IState> {
         const a = this.props.match.params.id;
         const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + a);
         const event = await result.json();
-        console.log(event)
         this.setState(
             {
               event: event,
@@ -78,13 +77,13 @@ export default class blankPage extends React.Component<any, IState> {
     }
 
     async delWorker(id: number,row: number) {
-      console.log(id)
       var copy = this.state.workers
       var ans = copy.splice(row, 1)
       this.setState({workers: copy})
       var eve = this.state.event
       var w = eve.workers.filter(e => e.workerId !== id)
       eve.workers = w
+      eve.workers.forEach(el => el.id = el.workerId)
 
       var r = await fetch('https://hrassistantservice.herokuapp.com/Learning/UpdateEvent/' + this.state.event.id, {
       method: 'POST',
