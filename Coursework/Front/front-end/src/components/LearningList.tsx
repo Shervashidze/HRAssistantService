@@ -39,12 +39,12 @@ export default class LearningList extends React.Component<any, IState> {
 
     deleteRow(id: number) {
       fetch('https://hrassistantservice.herokuapp.com/Learning/DeleteEvent/' + id, {method: 'DELETE'})
-      window.location.href = "http://hrassistantservice.herokuapp.com/learning/"
+      window.location.href = "https://hrassistantservice.herokuapp.com/learning/"
     }
 
     public render() {
       this.state.events.forEach((e: any) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>)
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "https://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>)
       this.state.events.forEach((e: any) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" 
         onClick={() => this.deleteRow(e.id)}>Удалить</a>)

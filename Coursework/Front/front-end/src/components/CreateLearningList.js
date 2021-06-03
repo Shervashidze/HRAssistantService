@@ -63,7 +63,7 @@ export function CreateLearningList() {
         }
         
         return (rows.forEach((e) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>),
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "https://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>),
         rows.forEach((e, index) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" 
         onClick={() => deleteRow(e.id, index)}>Удалить</a>),

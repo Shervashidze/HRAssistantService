@@ -44,7 +44,7 @@ export default class WorkersList extends React.Component<any, IState>
       const worker = await resultWorker.json();
       
       workers.forEach((e: any) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editWorker/" + e.id} role="button">Изменить</a>)
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "https://hrassistantservice.herokuapp.com/editWorker/" + e.id} role="button">Изменить</a>)
       workers.forEach((e: any) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
           () => fetch('https://hrassistantservice.herokuapp.com/api/Workers/Delete/' + e.id, {method: 'DELETE'})
