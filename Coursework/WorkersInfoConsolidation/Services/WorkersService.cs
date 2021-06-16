@@ -55,5 +55,18 @@ namespace WorkersInfoConsolidation.Services
         {
             return await dbContext.Set<Worker>().ToArrayAsync();
         }
+
+        public async Task<string[]> GetAllFactories()
+        {
+            return await dbContext.Set<Worker>()
+                .Select(w => w.Factory).Distinct().ToArrayAsync();
+        }
+
+        public async Task<Worker[]> GetFactoryWorkers(string name)
+        {
+            return await dbContext.Set<Worker>()
+                .Where(w => w.Factory.ToLower() == name.ToLower())
+                .ToArrayAsync();
+        }
     }
 }

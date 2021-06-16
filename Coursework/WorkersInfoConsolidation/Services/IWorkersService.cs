@@ -15,5 +15,7 @@ namespace WorkersInfoConsolidation.Services
         Task<int> AddWorkerAsync(Worker worker);
         int DeleteWorker(int id);
         Task<Worker[]> GetAllWorkers();
+        Task<string[]> GetAllFactories();
+        Task<Worker[]> GetFactoryWorkers(string name);
     }
 }

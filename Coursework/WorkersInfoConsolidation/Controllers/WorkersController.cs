@@ -92,6 +92,18 @@ namespace WorkersInfoConsolidation.Controllers
 
             return File(memStream, "application/vmd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
+
+        [HttpGet("Factory/All")]
+        public async Task<string[]> GetAllFactories()
+        {
+            return await workersService.GetAllFactories();
+        }
+
+        [HttpGet("Factory/{name}")]
+        public async Task<Worker[]> GetFactoryWorkers(string name)
+        {
+            return await workersService.GetFactoryWorkers(name);
+        }
     }
 }
 
