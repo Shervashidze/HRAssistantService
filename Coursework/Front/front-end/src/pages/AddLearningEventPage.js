@@ -5,7 +5,9 @@ import '../styles/AddWorker.css';
 
 import {useState, useRef, useCallback, useEffect} from 'react'
 import { MDBDataTableV5 } from 'mdbreact';
-
+import DatePicker from "react-datepicker";
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import {
   FileUploadContainer,
   FormField,
@@ -31,7 +33,7 @@ const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const FileUpload = ({
   label,
-  updateFilesCb,
+   updateFilesCb,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
@@ -133,7 +135,12 @@ export function CreateLearningEventPage() {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [date, setDate] = useState("");
+  let curDate = new Date()
+  let day = curDate.getDay();
+  let month = curDate.getMonth();
+  let year = curDate.getFullYear();
+
+  const [date, setDate] = useState();
   const [score, setScore] = useState(0);
   const [columns, setColumns] = useState(
     [
@@ -173,7 +180,6 @@ export function CreateLearningEventPage() {
         }
       ])
 
-    const [rows, setRows] = useState([])
     const [selected, setSelected] = useState([])
     let addRef = useRef();
     const history = useHistory();
@@ -216,56 +222,157 @@ async function sendEvent() {
   history.push('/learning')  
 }
 
-const fetchdata = useCallback(async () => {
-  const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
-  const workers = await result.json();
-  workers.forEach(element => {
-    element["checked"] = true
-  })
-  setRows(workers)
-}, [])
-
 useEffect(() => {
-  fetchdata()
-}, [fetchdata])
+  let copy = selected
+  copy.forEach((e, index) => 
+  e["actionDelete"]=<a className="btn btn-light"  onClick={() => handleDelete(index)} role="button">Удалить</a>)
+  setSelected(copy)
+})
 
-function deleteRow(id, index) {
-  const copy = [...rows]
+function handleDelete(index) {
+  let copy = [...selected]
   var ans = copy.splice(index, 1)
-  setRows(copy)
-  setSelected(element => [...element, {"id": id}])
+  setSelected(copy)
 }
 
 
-  return(rows.forEach((e, index) => 
-  e["actionDelete"]=<a className="btn btn-light" role="button" 
-  onClick={() => deleteRow(e.id, index)}>Добавить</a>),
+  return(
     <div id="createLP">
       <FileUpload multiple updateFilesCb={updateUploadedFiles}/>
       <div className="addWorkerForm">
-        <div className="form-group">
-          <label htmlFor="formLabel">
-            <input type="text" id="nam" name="name" className="form-control cform-control" onChange={(e) => handleName(e)} placeholder="Название"/>
-          </label>
+        <div className="mb-3">
+            <input type="text" id="nam" name="name" class="form-control cform-control" onChange={(e) => handleName(e)} placeholder="Название"/>
         </div>
-        <div className="form-group">
-          <label htmlFor="formLabel">
-            <input type="text" id="nam" name="phoneNumber" className="form-control cform-control1" onChange={(e) => handleDesc(e)} placeholder="Описание"/>
-          </label>
+        <div className="form">
+            <input type="text" id="nam" class="form-control cform-control" onChange={(e) => handleDesc(e)} placeholder="Описание"/>
         </div>
-        <div className="form-group">
-          <label htmlFor="formLabel">
-            <input type="text" id="nae" name="phoneNumber" className="form-control cform-control" onChange={(e) => handleDate(e)} placeholder="Дата"/>
-          </label>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="formLabel">
-            <input type="text" id="nae" name="phoneNumber" className="form-control cform-control" onChange={(e) => handleScore(e)} placeholder="Максимальный бал"/>
-          </label>
+        <div className="daterow">
+            <div>
+                <input type="text" className="form-control cform-control1" onChange={(e) => handleScore(e)} placeholder="Максимальный бал"/>
+            </div>
+            <div>
+              <DatePicker className="datepick" dateFormat="dd.MM.yyyy" locale="ru" selected={date} onChange={(date) => setDate(date)} placeholderText="Дата проведения" />
+            </div>
         </div>
 
         <MDBDataTableV5
+            id="WorkersAddTable"
+            data = {{columns: columns, rows: selected}}
+            striped
+            bordered={false}
+            btn
+            searchTop
+            searchBottom={false}
+            hover
+            entriesOptions={[5, 10, 25]}
+            entries={10}
+            pagesAmount={4}
+            />
+        <CustomAdd />
+        <input type="submit" className="btn btn-primary cbtn" value="Добавить" onClick={() => sendEvent()}/>
+      </div>
+    </div>
+  );
+
+  function CustomAdd() {
+    const history = useHistory()
+    const [show, setShow] = useState(false);
+    const [columns, setColumns] = useState(
+        [
+            {
+              label: 'Имя',
+              field: 'name',
+              sort: 'asc',
+              width: 75
+            },
+            {
+              label: 'Подразделение',
+              field: 'department',
+              sort: 'asc',
+              width: 135
+            },
+            {
+              label: 'Должность',
+              field: 'post',
+              sort: 'asc',
+              width: 135
+            },
+            {
+              label: 'Почта',
+              field: 'email',
+              sort: 'asc',
+              width: 300
+            },
+            {
+              label: '',
+              sort: 'disabled',
+              field: 'actionAdd'
+            },
+            {
+              label: '',
+              sort: 'disabled',
+              field: 'actionDelete'
+            }
+          ])
+    
+    const [rows, setRows] = useState([])
+    
+    const [current, setCurrent] = useState(selected);
+  
+    const handleClose = () => {
+        setShow(false)
+    }
+    const handleShow = () => setShow(true);
+  
+    const fetchdata = useCallback(async () => {
+        const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
+        const workers = await result.json();
+
+        let a = workers
+        for (var i = 0; i < current.length; i++) {
+            a = a.filter(el => el.id !== current[i].id)
+        }
+        setRows(a)
+    }, [])
+      
+    useEffect(() => {
+        fetchdata()
+    }, [fetchdata])
+  
+    
+      function deleteRow(e, index) {
+        const copy = [...rows]
+        var ans = copy.splice(index, 1)
+        setRows(copy)
+        setCurrent(element => [...element, {"id": e.id, "name": e.name, "department": e.department, "email": e.email, "post": e.post}])
+      }
+  
+      async function saveChanges() {
+        let copy = current
+        setSelected(copy)
+        handleClose()
+      }
+  
+    return (rows.forEach((e, index) => 
+    e["actionDelete"]=<a className="btn btn-light" role="button" 
+    onClick={() => deleteRow(e, index)}>Добавить</a>),
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Добавить работника
+        </Button>
+  
+        <Modal
+          show={show}
+          size="xl"
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Добавить работника</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <MDBDataTableV5
             id="WorkersAddTable"
             data = {{columns: columns, rows: rows}}
             autoWidth
@@ -279,10 +386,19 @@ function deleteRow(id, index) {
             entries={10}
             pagesAmount={4}
             />
-        <input type="submit" className="btn btn-primary cbtn" value="Добавить" onClick={() => sendEvent()}/>
-      </div>
-    </div>
-  );
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Закрыть
+            </Button>
+            <Button variant="primary" onClick={saveChanges}>
+                Сохранить изменения
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 }
 
 

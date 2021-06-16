@@ -1,6 +1,6 @@
 .addWorkerForm {
     width: 70%;
-    margin-left: 20%;
+    margin-left: 15%;
     margin-right: auto;
   }
 
@@ -8,7 +8,7 @@
     padding: 10px;
     margin: 5px 0;
     border-radius:10px;
-    width:400%;
+    width:100%;
     text-align: center;
 }
 
@@ -16,7 +16,22 @@
     padding: 10px;
     margin: 5px 0;
     border-radius:10px;
-    width: 400%;
+    width: 200%;
+    text-align: center;
+}
+
+.daterow {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    margin: 10px 0;
+    border-radius:10px;
+    width: 100%;
+}
+
+.datepick {
+    width: 100%;
     text-align: center;
 }
 

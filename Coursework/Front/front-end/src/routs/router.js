@@ -10,7 +10,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WorkersPage from '../pages/WorkersPage';
 import LearningPage from "../pages/LearningPage";
 import DashboardsPage from "../pages/DashboardsPage";
-import BlankPage from "../pages/blankPage";
 import EditWorker from '../pages/EditWorker';
 
 
@@ -23,8 +22,7 @@ import {CreateInfoPage} from './worker/WorkerPersonalPage'
 import AddWorkerPage from '../pages/AddWorkerPage'
 import EditWorkerPage from '../pages/EditWorkerPage'
 import {CreateLearningEventPage} from '../pages/AddLearningEventPage'
-import EditLearningEventPage from '../pages/EditLearningEventPage'
-import blankPage from '../pages/blankPage'
+import { ViewLearningEventPage } from '../pages/ViewLearningEventPage'
 import NavBar from '../components/NavBar';
 import { CreateTopBar} from './worker/Topbar'
 
@@ -37,8 +35,6 @@ export function CreateRouter() {
 
     
     const logstatus = log.logstatus
-    console.log(log)
-    console.log(localStorage.getItem("_status"))
 
     return (
         <React.Fragment>
@@ -69,8 +65,8 @@ const authentication = (logstatus) => {
                 <Route exact path="/account" component={AccountPage} />
                 <Route exact path="/addWorker" component={AddWorkerPage} />
                 <Route exact path="/addLearningEvent" component={CreateLearningEventPage} />
-                <Route exact path="/editLearningEvent/:id" component={blankPage} />
-                <Route exact path="/learning/:id" component={blankPage}/>
+                <Route exact path="/editLearningEvent/:id"  />
+                <Route exact path="/learning/:id" component={ViewLearningEventPage}/>
                 <Route exact path="/editWorker/:id" component={EditWorkerPage}/>
                 <Route exact path="/info" component={CreateInfoPage}/>
                 <Route render={() => <Redirect to="/info" />} />

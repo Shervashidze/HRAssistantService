@@ -38,6 +38,10 @@ body {
   align-self: flex-end;
 }
 
+.container-row {
+  width: 10%;
+}
+
 
 #loginId {
   width: 20%;
@@ -74,6 +78,7 @@ body {
   width: 20%;
   height: 21%;
 }
+
 
 #editLP {
   padding: 1%;

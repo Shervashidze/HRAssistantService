@@ -1,7 +1,9 @@
 import React from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
+import { fetchAllLearningEvents, deleteLearningEvent } from '../services/fetch-service'
+import { Link } from 'react-router-dom'
 
 
 export function CreateLearningList() {
@@ -28,6 +30,7 @@ export function CreateLearningList() {
             {
               label: 'Планируемая дата обучения',
               field: 'plannedDate',
+              type: 'date',
               sort: 'asc',
               width: 100
             },
@@ -44,34 +47,40 @@ export function CreateLearningList() {
           ])
 
         const [rows, setRows] = useState([])
-
-        const fetchdata = useCallback(async () => {
-            const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetAll');
-            const events = await result.json();
-            setRows(events)
-        }, [])
         
         useEffect(() => {
-            fetchdata()
-        }, [fetchdata])
+            fetchAllLearningEvents().then((events) => {
+              events.forEach(e => 
+                e.plannedDate = e.plannedDate.substring(0, 10)
+              )
+
+              setRows(events)
+            })
+        }, [])
 
         function deleteRow(id, index) {
-            fetch('https://hrassistantservice.herokuapp.com/Learning/DeleteEvent/' + id, {method: 'DELETE'})
+            deleteLearningEvent(id);
             const copy = [...rows]
             var ans = copy.splice(index, 1)
             setRows(copy)
         }
+
+        function initButtons() {
+          rows.forEach((e) => 
+          e["actionChange"]=<Link to={"/learning/" + e.id} className="btn btn-light">Просмотреть</Link>)
+
+          rows.forEach((e, index) => 
+          e["actionDelete"]=<a className="btn btn-light" role="button" 
+          onClick={() => deleteRow(e.id, index)}>Удалить</a>)
+        }
         
-        return (rows.forEach((e) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editLearningEvent/" + e.id} role="button">Изменить</a>),
-        rows.forEach((e, index) => 
-        e["actionDelete"]=<a className="btn btn-light" role="button" 
-        onClick={() => deleteRow(e.id, index)}>Удалить</a>),
+
+        initButtons()
+        return (
             <>
             <div className='body-custom1'>
             <MDBDataTableV5
             id="LearningEventsTable"
-            autoWidth
             striped
             bordered={false}
             btn
@@ -81,7 +90,7 @@ export function CreateLearningList() {
             />
             <div>
               <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить обучающее событие</a>
-              <a className="btn btn-primary" onClick={() => downloadTableWithoutLast2('LearningEventsTable','1','Обучение.xls')} role="button">Загрузить в виде Excel</a>
+              <a className="btn btn-primary" onClick={() => downloadTable('LearningEventsTable','1','Обучение')} role="button">Загрузить в виде Excel</a>
             </div>
             </div>
           </>);

@@ -54,7 +54,6 @@ const CreateLoginPage = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -64,7 +63,8 @@ const CreateLoginPage = () => {
 
     if (checkBtn.current.context._errors.length === 0) {
 
-      var a = await login(username, password)
+      a = await login(username, password)
+      console.log(a.status)
       if (a.status == 200) {
         let data = await a.text()
         let decoded = jwt_decode(data)
@@ -101,7 +101,6 @@ const CreateLoginPage = () => {
       <div className="" id="LoginTable">
         { isLoggedIn ? (<Redirect push to="/info"/>) : null }
         <div className="">
-
           <Form onSubmit={handleLogin} ref={form}>
             <div className="form-group">
               <label htmlFor="username">Имя пользователя</label>
