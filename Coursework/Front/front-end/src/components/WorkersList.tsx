@@ -3,6 +3,7 @@ import { MDBDataTableV5 } from 'mdbreact';
 import emptyAvatar from '../imgs/avatar.png'
 import { useState, useEffect, useCallback } from 'react'
 import { downloadTable, downloadTableWithoutLast2 } from "../services/file-service";
+import { getAllWorkers, getWorker } from "../services/fetch-service";
 
 export interface IWorker {
     id: number,
@@ -38,13 +39,14 @@ export default class WorkersList extends React.Component<any, IState>
         {
           loading:true
         })
-      const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
+      const result = await getAllWorkers();
       const workers = await result.json();
-      const resultWorker = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/Worker/1');
+      //const resultWorker = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/Worker/1');
+      const resultWorker = await getWorker(1);
       const worker = await resultWorker.json();
       
       workers.forEach((e: any) => 
-        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "http://hrassistantservice.herokuapp.com/editWorker/" + e.id} role="button">Изменить</a>)
+        e["actionChange"]=<a className="btn btn-light"  onClick={() => window.location.href = "https://localhost:3001/editWorker/" + e.id} role="button">Изменить</a>)
       workers.forEach((e: any) => 
         e["actionDelete"]=<a className="btn btn-light" role="button" onClick={
           () => fetch('https://hrassistantservice.herokuapp.com/api/Workers/Delete/' + e.id, {method: 'DELETE'})
@@ -63,15 +65,16 @@ export default class WorkersList extends React.Component<any, IState>
       const worker = await result.json();
       this.setState(
         {
-        worker:worker,
-        loading: false
+          worker:worker,
+          loading: false
         });
     }
 
     public render() {
       this.state.workers.forEach(element => 
         element.clickEvent = () => {
-          const path = "https://hrassistantservice.herokuapp.com/api/Workers/Worker/" + element.id;
+          //const path = "https://hrassistantservice.herokuapp.com/api/Workers/Worker/" + element.id;
+          const path = "https://localhost:5001/api/Workers/Worker/" + element.id;
           this.handleTableClick(path);
         })
       const data = {

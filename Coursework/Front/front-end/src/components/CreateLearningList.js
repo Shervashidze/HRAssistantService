@@ -90,7 +90,7 @@ export function CreateLearningList() {
             />
             <div>
               <a className="btn btn-primary" href="/addLearningEvent" role="button">Добавить обучающее событие</a>
-              <a className="btn btn-primary" onClick={() => downloadTable('LearningEventsTable','1','Обучение')} role="button">Загрузить в виде Excel</a>
+              <a className="btn btn-primary" onClick={() => downloadTableWithoutLast2('LearningEventsTable','1','Обучение')} role="button">Загрузить в виде Excel</a>
             </div>
             </div>
           </>);

@@ -56,10 +56,12 @@ export function Example() {
     const handleShow = () => setShow(true);
 
     const fetchdata = useCallback(async () => {
-        const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
+        const address = "https://localhost:5001/"
+        const le = "https://localhost:8001/"
+        const result = await fetch(address + 'api/Workers/All');
         const workers = await result.json();
 
-        const res = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + props.id)
+        const res = await fetch(le + 'Learning/GetLearningEvent/' + props.id)
         const cur = await res.json();
         const curw = cur.workers
         let a = workers
@@ -87,19 +89,21 @@ export function Example() {
       }
 
       async function saveChanges() {
-        const result = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetLearningEvent/' + props.id);
+        //https://hrassistantservice.herokuapp.com/
+        ad = "https://localhost:8001/"
+        const result = await fetch(ad + 'Learning/GetLearningEvent/' + props.id);
         let event = await result.json();
         console.log(event)
         event.workers = current;
         event.workers.forEach(worker => {if (typeof worker.workerId !== "undefined") 
             worker.id = worker.workerId})
         console.log(event)
-        var r = await fetch('https://hrassistantservice.herokuapp.com/Learning/UpdateEvent/' + props.id, {
+        var r = await fetch(ad + 'Learning/UpdateEvent/' + props.id, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(event)
             });
-        window.location.href = "https://hrassistantservice.herokuapp.com/editLearningEvent/" + props.id
+        window.location.href = "https://localhost:3000/" + "editLearningEvent/" + props.id
       }
   
     return (rows.forEach((e, index) => 

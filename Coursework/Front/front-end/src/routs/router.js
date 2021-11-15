@@ -25,6 +25,7 @@ import {CreateLearningEventPage} from '../pages/AddLearningEventPage'
 import { ViewLearningEventPage } from '../pages/ViewLearningEventPage'
 import NavBar from '../components/NavBar';
 import { CreateTopBar} from './worker/Topbar'
+import { EditLearningEventPage } from '../pages/EditLearningEventPage';
 
 const history = createBrowserHistory({});
 
@@ -65,7 +66,7 @@ const authentication = (logstatus) => {
                 <Route exact path="/account" component={AccountPage} />
                 <Route exact path="/addWorker" component={AddWorkerPage} />
                 <Route exact path="/addLearningEvent" component={CreateLearningEventPage} />
-                <Route exact path="/editLearningEvent/:id"  />
+                <Route exact path="/editLearningEvent/:id" component={EditLearningEventPage}  />
                 <Route exact path="/learning/:id" component={ViewLearningEventPage}/>
                 <Route exact path="/editWorker/:id" component={EditWorkerPage}/>
                 <Route exact path="/info" component={CreateInfoPage}/>

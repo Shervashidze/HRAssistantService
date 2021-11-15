@@ -22,6 +22,8 @@ import {
   InputLabel
 } from "../styles/file-upload.styles";
 import { useHistory } from 'react-router';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import { createLP, uploadFile } from '../services/fetch-service';
 
 const KILO_BYTES_PER_BYTE = 1000;
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
@@ -135,12 +137,9 @@ export function CreateLearningEventPage() {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [selectedFiles, setSelectedFiles] = useState([]);
-  let curDate = new Date()
-  let day = curDate.getDay();
-  let month = curDate.getMonth();
-  let year = curDate.getFullYear();
 
-  const [date, setDate] = useState();
+
+  const [date, setDate] = useState(new Date());
   const [score, setScore] = useState(0);
   const [columns, setColumns] = useState(
     [
@@ -214,12 +213,32 @@ async function sendEvent() {
     maxScore: parseInt(score, 10),
     workers: selected
   })
-  var ans = await fetch('https://hrassistantservice.herokuapp.com/Learning/CreateLearningEvent', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: b
-  })
-  history.push('/learning')  
+
+  // https://hrassistantservice.herokuapp.com/Learning/CreateLearningEvent
+  // var ans = await fetch('https://localhost:8001/Learning/CreateLearningEvent', {
+  //   method: 'POST',
+  //   headers: {'Content-Type': 'application/json'},
+  //   body: b
+  // })
+
+  var ans = await createLP(b);
+
+  var fetched = await ans.json();
+
+  const formData = new FormData();
+  formData.name = "files";
+  for (const f of selectedFiles) {
+    formData.append("files", f);
+  }
+
+  //var a = await uploadFile(formData, fetched);
+
+  await fetch('https://localhost:8001/Learning/UploadFile/' + fetched, {
+      method: 'POST',
+      body: formData
+    })
+  
+  history.push('/learning') 
 }
 
 useEffect(() => {
@@ -248,10 +267,10 @@ function handleDelete(index) {
         </div>
         <div className="daterow">
             <div>
-                <input type="text" className="form-control cform-control1" onChange={(e) => handleScore(e)} placeholder="Максимальный бал"/>
+                <input type="text" className="form-control cform-control1" onChange={(e) => handleScore(e)} placeholder="Максимальный балл"/>
             </div>
             <div>
-              <DatePicker className="datepick" dateFormat="dd.MM.yyyy" locale="ru" selected={date} onChange={(date) => setDate(date)} placeholderText="Дата проведения" />
+              <DatePicker className="datepick" dateFormat="dd.MM.yyyy" locale="ru"  selected={date} onChange={(date) => setDate(date)} placeholderText="Дата проведения" />
             </div>
         </div>
 
@@ -325,7 +344,7 @@ function handleDelete(index) {
     const handleShow = () => setShow(true);
   
     const fetchdata = useCallback(async () => {
-        const result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/All');
+        const result = await fetch('https://localhost:5001/api/Workers/All');
         const workers = await result.json();
 
         let a = workers

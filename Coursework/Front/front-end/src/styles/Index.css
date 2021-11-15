@@ -20,8 +20,9 @@ body {
 }
 
 #worker-card {
-  position: relative; right: 1%;
-  position: relative; top: 15%;
+  position: sticky; 
+  right: 1%;
+  top: 7%;
   margin-top: 10px;
   width: 25%;
   height: 90%;

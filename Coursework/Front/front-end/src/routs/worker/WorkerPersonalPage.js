@@ -6,6 +6,7 @@ import AccountPage from '../../pages/AccountPage'
 import emptyAvatar from '../../imgs/avatar_1.png'
 import './style.css'
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import { getWorkerByEmail, getWorker } from '../../services/fetch-service'
 
 export function CreateInfoPage() {
     const log = useSelector(selectLoginstatus)
@@ -26,9 +27,9 @@ export function CreateInfoPage() {
         if (log.username === '') {
             return
         }
-        let r = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/WorkerByEmail/' + log.username)
+        let r = await getWorkerByEmail(log.username)
         let a = await r.json()
-        let result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/Worker/' + a.id);
+        let result = await getWorker(a.id);
         let worker = await result.json();
         setName(worker.name)
         setPhoneNumber(worker.phoneNumber)

@@ -22,7 +22,9 @@ async function login(em, pas) {
     email: em, 
     password: pas
   });
-  var result = await fetch('https://hrassistantservice.herokuapp.com/api/account/login', {
+  //https://hrassistantservice.herokuapp.com/api/account/login
+  var ad = "https://localhost:4001/"
+  var result = await fetch(ad + 'api/account/login', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: b
@@ -63,7 +65,7 @@ const CreateLoginPage = () => {
 
     if (checkBtn.current.context._errors.length === 0) {
 
-      a = await login(username, password)
+      var a = await login(username, password)
       console.log(a.status)
       if (a.status == 200) {
         let data = await a.text()

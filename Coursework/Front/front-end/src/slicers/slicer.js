@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const loginstatusSlice = createSlice({
     name: 'loginstatus',
     initialState: {
-        logstatus: 'Admin',
+        logstatus: localStorage.getItem("_status") !== null ? localStorage.getItem("_status") : 'unlog',
         token: localStorage.getItem("_token") !== null ? localStorage.getItem("_token") : '',
         username:  localStorage.getItem("_user") !== null ? localStorage.getItem("_user") : ''
     },

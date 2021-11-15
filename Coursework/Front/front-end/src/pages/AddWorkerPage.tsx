@@ -82,7 +82,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
     return(
       <>
       {!submitSuccess && (
-                      <div className="alert alert-info" role="alert">
+                      <div className="alert alert-info centered" role="alert">
                         Введите данные нового сотрудника.
                       </div>
                     )}
@@ -91,8 +91,9 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
                         Сотрудник добавлен.
                       </div>
         )}
+
       <div className="addWorkerForm">
-        <form id={"create-post-form"} onSubmit={this.processFormSubmission} noValidate={true}>
+        <form onSubmit={this.processFormSubmission} noValidate={true}>
           <div className="form-group">
           <label htmlFor="formLabel">
             <input type="text" id="nam" name="name" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Имя"/>
@@ -139,7 +140,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
           </label>
           </div>
           
-          <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
+          <input type="submit" className="btn btn-primary fullWide" value="Добавить" />
         </form>
       </div>
       </>

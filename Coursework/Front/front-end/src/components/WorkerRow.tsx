@@ -4,7 +4,7 @@ import { Component } from 'react'
 export default class WorkerRow extends React.Component<any, any>{
   deleteRow() {
     let id = this.props.worker.id;
-    fetch('https://hrassistantservice.herokuapp.com/api/Workers/Delete/' + id, {
+    fetch('https://localhost:5001/api/Workers/Delete/' + id, {
       method: 'DELETE'
     });
   }

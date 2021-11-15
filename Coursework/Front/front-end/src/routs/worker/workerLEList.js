@@ -6,6 +6,7 @@ import { MDBDataTable } from 'mdbreact';
 import Button from 'react'
 import { Redirect } from 'react-router';
 import { useHistory } from "react-router-dom";
+import { getWorkerByEmail } from '../../services/fetch-service';
 
 
 export function LEList () {
@@ -48,10 +49,11 @@ export function LEList () {
 
 
   const fetchdata = useCallback(async () => {
-    let result = await fetch('https://hrassistantservice.herokuapp.com/api/Workers/WorkerByEmail/' + log.username);
+    var ad = "https://localhost:8001/"
+    let result = await getWorkerByEmail(log.username);
     let worker = await result.json();
     console.log(worker)
-    let result1 = await fetch('https://hrassistantservice.herokuapp.com/Learning/GetAllById/' + worker.id)
+    let result1 = await fetch(ad + 'Learning/GetAllById/' + worker.id)
     let events1 = await result1.json();
     events1.forEach(e => e["action"]=<button className="btn btn-light"  onClick={<div></div>}>Заполнить форму</button>)
     setEvents(events1)
