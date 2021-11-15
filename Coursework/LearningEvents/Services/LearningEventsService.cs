@@ -30,6 +30,22 @@ namespace LearningEvents.Services
         public async Task<bool> Update(long id, LearningEvent learningEvent)
         {
             var ev = await GetEvent(id);
+            if (learningEvent == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < learningEvent.Workers.Count; i++)
+            {
+                var ad = await Context.Set<Worker>().FirstOrDefaultAsync(w => w.LearningEventId == id && w.WorkerId == learningEvent.Workers[i].WorkerId);
+                var a = ad.Id;
+                var w = Context.Set<Worker>().Find(a);
+                Context.Set<Worker>().Remove(w);
+                w.InitialScore = learningEvent.Workers[i].InitialScore;
+                w.AfterwardsScore = learningEvent.Workers[i].AfterwardsScore;
+                Context.Set<Worker>().Add(w);
+                Context.SaveChanges();
+            }
             ev.Workers = learningEvent.Workers;
             ev.MaxScore = learningEvent.MaxScore;
             ev.Name = learningEvent.Name;
@@ -57,5 +73,26 @@ namespace LearningEvents.Services
         {
             return await Context.Set<LearningEvent>().Include(c => c.Workers.Where(cm => cm.WorkerId == id)).Where(c => c.Workers.Where(cm => cm.WorkerId == id).Count() > 0).ToArrayAsync();
         }
+
+        public async Task<bool> SetFeedback(long eventId, long userId, Feedback feedback)
+        {
+            var find = Context.Set<Feedback>().Find(feedback.EventId, feedback.WorkerId);
+            if (find != null)
+            {
+                Context.Set<Feedback>().Remove(find);
+                Context.SaveChanges();
+            }
+
+            var res = await Context.Set<Feedback>().AddAsync(feedback);
+            await Context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<Feedback> GetFeedbackAsync(long eventId, long userId)
+        {
+            return Context.Set<Feedback>().Find(eventId, userId);
+        }
+
     }
 }

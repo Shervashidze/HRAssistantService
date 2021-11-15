@@ -12,10 +12,17 @@ namespace LearningEvents.Models
         public DbSet<LearningEvent> LearningEvents { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Competence> Competence { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         public LearningServiceContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Feedback>().ToTable("Feedbacks");
+            modelBuilder.Entity<Feedback>().HasKey(s => new { s.EventId, s.WorkerId });
         }
     }
 }

@@ -53,6 +53,10 @@ namespace WorkersInfoConsolidation.Controllers
         public async Task<IActionResult> GetWorker(int id)
         {
             var worker = await workersService.GetWorkerAsync(id);
+            if (worker != null)
+            {
+                worker.DateOfBirth = worker.DateOfBirth.Substring(0, 10);
+            }
             return worker == null
                 ? NotFound()
                 : Ok(worker) as IActionResult;
@@ -62,6 +66,7 @@ namespace WorkersInfoConsolidation.Controllers
         public async Task<IActionResult> GetWorkerByEmail(string email)
         {
             var worker = await workersService.GetWorkerByEmailAsync(email);
+            worker.DateOfBirth = worker.DateOfBirth.Substring(0, 10);
             return worker == null
                 ? NotFound()
                 : Ok(worker) as IActionResult;

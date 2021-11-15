@@ -137,7 +137,7 @@ export default class AddWorkerPage extends React.Component<any, IFormState> {
           <label htmlFor="formLabel">
             <input type="text" id="dateOfBirth" name="dateOfBirth" className="form-control cform-control" onChange={(e) => this.handleInputChanges(e)} placeholder="Дата Рождения (гггг-мм-дд)"/>
           </label>
-          </div>
+          </div>3
           
           <input type="submit" className="btn btn-primary cbtn" value="Добавить" />
         </form>

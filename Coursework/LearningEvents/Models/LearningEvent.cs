@@ -11,7 +11,6 @@ namespace LearningEvents.Models
 
         public string Name { get; set; }
 
-
         public string PlannedDate { get; set; }
 
         public List<Competence> CompetencesId { get; set; } = new List<Competence>();

@@ -85,25 +85,27 @@ namespace WorkersInfoConsolidation.Services
         //Todo register new user as admin
         public async Task<IdentityResult> RegisterUserAsync(RegisterViewModel model)
         {
-            return null;
-            //if (await _userManager.FindByEmailAsync(model.Email).ConfigureAwait(false) != null)
-            //{
-            //    return IdentityResult.Failed(new IdentityError { Description = "User alredy exists" });
-            //}
+            if (await _userManager.FindByEmailAsync(model.Email).ConfigureAwait(false) != null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "User alredy exists" });
+            }
 
-            //var user = new Worker
-            //{
-            //    Name = model.Name,
-              
-            //};
+            var user = new Worker
+            {
+                UserName = model.Name,
+                Email = model.Email
+            };
 
-            //return await _userManager.CreateAsync(user, model.Password)
-            //    .Then(() => _userManager.AddToRoleAsync(user, model.Role))
-            //    .Then(() =>
-            //    {
-            //        user.EmailConfirmed = true;
-            //        return _userManager.UpdateAsync(user);
-            //    }).ConfigureAwait(false);
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, model.Role); //TODO: dangerous
+                user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
+            }
+
+            return IdentityResult.Success;
         }
 
         private Task<IdentityResult> ChangeUserNameTask(Worker user, EditAccountViewModel model)
