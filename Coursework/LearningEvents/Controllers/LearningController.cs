@@ -12,6 +12,7 @@ using LearningEvents.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.StaticFiles;
+using GemBox.Document;
 
 namespace LearningEvents.Controllers
 {
@@ -176,6 +177,127 @@ namespace LearningEvents.Controllers
             return ans == null
                 ? NotFound()
                 : Ok(ans);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> getFileFeedback(int id, int material)
+        {
+            var ans = await _learningService.GetFeedbackAsync(id, material);
+            try
+            {
+                System.IO.File.Delete("Feedback.docx");
+            } catch (Exception e)
+            {
+
+            }
+
+            ComponentInfo.SetLicense("FREE-LIMITED-KEY");
+
+            DocumentModel document = new DocumentModel();
+
+            Section section = new Section(document);
+            document.Sections.Add(section);
+
+            Paragraph paragraph = new Paragraph(document);
+            section.Blocks.Add(paragraph);
+
+            Run run = new Run(document, "Ф.И: сидоров");
+            paragraph.Inlines.Add(run);
+
+            paragraph = new Paragraph(document);
+            section.Blocks.Add(paragraph);
+            paragraph.Inlines.Add(new Run(document, "Должность: "));
+
+            paragraph = new Paragraph(document);
+            section.Blocks.Add(paragraph);
+            paragraph.Inlines.Add(new Run(document, "Подразделение: Нефтяной район №2 "));
+
+            var numberList = new ListStyle(ListTemplateType.NumberWithDot);
+
+            var blocks = section.Blocks;
+            // Create number list items.
+            blocks.Add(new Paragraph(document, "На Ваш взгляд являлась ли программа актуальной для Вас с учётом имеющегося опыта работы?")
+            { 
+                ListFormat = { Style = numberList }
+            });
+            blocks.Add(new Paragraph(document, "Очень актуально, важно идти с опережением вперёд")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "Актуально")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "Не могу сказать")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "Есть более актуальные темы для обучения (напишите какие именно)")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "Комментарий: " + ans.ActuallityComment)
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+
+
+
+            blocks.Add(new Paragraph(document, "Отметьте, пожалуйста, как Вы оцениваете содержание учебных курсов")
+            {
+                ListFormat = { Style = numberList }
+            });
+            blocks.Add(new Paragraph(document, "отлично")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "очень хорошо")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "хорошо")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "удовлетворительно")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "слабо")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "Комментарий: " + ans.ActuallityComment)
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+
+
+
+            blocks.Add(new Paragraph(document, "Считаете ли Вы, что полученные знания и новые навыки сможете применить в своей повседневной работе?")
+            {
+                ListFormat = { Style = numberList }
+            });
+            blocks.Add(new Paragraph(document, "смогу использовать в высокой степени")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+            blocks.Add(new Paragraph(document, "смогу использовать в некоторой степени ")
+            {
+                ListFormat = { Style = numberList, ListLevelNumber = 1 }
+            });
+
+            document.Save("Feedback.docx");
+
+            new FileExtensionContentTypeProvider().TryGetContentType("Feedback.docx", out string contentType);
+            var bytes = System.IO.File.ReadAllBytes("Feedback.docx");
+            return new FileContentResult(bytes, contentType)
+            {
+                FileDownloadName = "Feedback.docx"
+            };
+
+            document.Save("Feedback.docx");
+            return Ok();
         }
 
         [HttpPost]

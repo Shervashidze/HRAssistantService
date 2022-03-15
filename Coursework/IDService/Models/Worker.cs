@@ -20,8 +20,6 @@ namespace WorkersInfoConsolidation.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
-        public List<Competence> CompetenceIdsList { get; set; } = new List<Competence>();
-
         public Worker()
         {
         }

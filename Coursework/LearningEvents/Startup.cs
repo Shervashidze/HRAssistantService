@@ -54,10 +54,10 @@ namespace LearningEvents
             app.UseStaticFiles();
 
             app.UseCors(builder => builder
-                .WithOrigins("http://localhost:3000") // I allow it to call api from server where react runs
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowAnyHeader());
+                //.AllowCredentials()) ;
 
             app.UseRouting();
 

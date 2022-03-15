@@ -8,8 +8,6 @@ namespace WorkersInfoConsolidation.Models
     {
         public DbSet<Worker> Workers { get; set; }
 
-        public DbSet<Competence> Competences { get; set; }
-
         public WorkersDbContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();

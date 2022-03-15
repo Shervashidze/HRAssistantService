@@ -107,12 +107,11 @@ namespace WorkersInfoConsolidation
                 RoleInitializer.InitializeAsync(userManager, rolesManager).Wait();
             }
 
-            app.UseCors(builder =>builder
-                .WithOrigins("http://localhost:3000") // I allow it to call api from server where react runs
-                .WithOrigins("http://localhost:7000") // I allow it to call api from server where react runs
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials());
+                .AllowAnyMethod());
+                //.AllowCredentials());
             
             app.UseRouting();
 

@@ -37,13 +37,12 @@ namespace LearningEvents.Services
 
             for (int i = 0; i < learningEvent.Workers.Count; i++)
             {
-                var ad = await Context.Set<Worker>().FirstOrDefaultAsync(w => w.LearningEventId == id && w.WorkerId == learningEvent.Workers[i].WorkerId);
-                var a = ad.Id;
+                var ad = await Context.Set<Worker>().Where(w => w.LearningEventId == id && w.WorkerId == learningEvent.Workers[i].WorkerId).ToArrayAsync();
+                var a = ad[0].Id;
                 var w = Context.Set<Worker>().Find(a);
-                Context.Set<Worker>().Remove(w);
                 w.InitialScore = learningEvent.Workers[i].InitialScore;
                 w.AfterwardsScore = learningEvent.Workers[i].AfterwardsScore;
-                Context.Set<Worker>().Add(w);
+                Context.Set<Worker>().Update(w);
                 Context.SaveChanges();
             }
             ev.Workers = learningEvent.Workers;
